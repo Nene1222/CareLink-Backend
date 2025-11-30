@@ -115,3 +115,6 @@ npx ts-node src/seed-runner.ts
 
 # start dev server
 npm run dev
+
+cd "C:\Year 4\cap2-project\frontend"
+npm install jspdf html2canvas

@@ -4,6 +4,7 @@ import cors from 'cors'
 import attendanceRouter from './routes/attendance'
 import organizationsRouter from './routes/organizations'
 import networksRouter from './routes/networks'
+import appointmentsRouter from './routes/appointments'
 import { connectDb } from './db'
 import { seedDatabase } from './seed' // <-- new
 
@@ -18,6 +19,7 @@ app.use(express.json())
 app.use('/api/attendance', attendanceRouter)
 app.use('/api/organizations', organizationsRouter)
 app.use('/api/networks', networksRouter)
+app.use('/api/appointments', appointmentsRouter)
 
 app.get('/health', (_req, res) => res.json({ ok: true }))
 

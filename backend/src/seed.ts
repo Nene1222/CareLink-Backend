@@ -1,18 +1,20 @@
 import { Attendance } from './models/attendance'
 import { Organization } from './models/organization'
 import { Network } from './models/network'
+import { Appointment } from './models/appointment'
 
 export async function seedDatabase() {
   try {
     const attCount = await Attendance.countDocuments()
     const orgCount = await Organization.countDocuments()
     const netCount = await Network.countDocuments()
+    const appCount = await Appointment.countDocuments()
 
     let networks: any[] = []
     if (netCount === 0) {
       const nets = [
         { name: 'Main Network', ipAddress: '192.168.1.1' },
-        { name: 'Secondary Network', ipAddress: '192.168.1.50' },
+        { name: 'My home', ipAddress: '175.100.10.230' },
       ]
       networks = await Network.insertMany(nets)
       console.log('Seeded networks')
@@ -78,6 +80,15 @@ export async function seedDatabase() {
       ]
       await Attendance.insertMany(attendances)
       console.log('Seeded attendances')
+    }
+
+    if (appCount === 0) {
+      await Appointment.insertMany([
+        { patientName: 'Sambo Sopheakline', patientId: 'P001', doctorName: 'Dr. Sarah Johnson', doctorRole: 'General Physician', date: '2025-01-20', time: '09:00 AM', room: 'Room 101', reason: 'Regular checkup' },
+        { patientName: 'Sambo Sopheaklinet', patientId: 'P002', doctorName: 'Dr. Michael Chen', doctorRole: 'Cardiologist', date: '2025-01-21', time: '10:00 AM', room: 'Room 202', reason: 'Follow-up' },
+        { patientName: 'Poch Sreypov', patientId: 'P003', doctorName: 'Dr. Sarah Johnson', doctorRole: 'General Physician', date: '2025-01-22', time: '11:00 AM', room: 'Room 101', reason: 'Consultation' },
+      ])
+      console.log('Seeded appointments')
     }
 
     console.log('Seeding complete')

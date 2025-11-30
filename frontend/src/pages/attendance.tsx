@@ -1,7 +1,7 @@
-// "use client"   <-- removed for Vite (not Next.js)
 import React, { useState, useEffect, useRef } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { Plus, Edit, Trash2, QrCode, AlertCircle, CheckCircle, Clock, Download, X, Camera, Upload } from 'lucide-react'
-import QRCode from 'qrcode'
+import QRCode from 'qrcode' //ignore that shit cus it work and idk why it still red
 import './attendance.css'
 
 interface Attendance {
@@ -159,6 +159,8 @@ export default function AttendancePage() {
     isScanned: boolean
   } | null>(null)
 
+  const [searchParams] = useSearchParams()
+
   // load attendance from backend on mount
   useEffect(() => {
     const fetchAttendances = async () => {
@@ -209,6 +211,14 @@ export default function AttendancePage() {
     })()
   }, [])
 
+  // Auto-open QR modal when URL contains ?mode=scan
+  useEffect(() => {
+    if (searchParams.get('mode') === 'scan') {
+      setIsQRDialogOpen(true)
+      setCameraActive(true)
+    }
+  }, [searchParams])
+
   // Update attendance fetch to use today's date
   useEffect(() => {
     const todayStr = new Date().toISOString().split('T')[0]
@@ -217,6 +227,8 @@ export default function AttendancePage() {
   }, [attendance])
 
   // API helpers
+  const normalizeNetwork = (n: any) => ({ id: n?.id ?? n?._id, name: n?.name, ipAddress: n?.ipAddress })
+
   const createAttendanceAPI = async (payload: Partial<Attendance>) => {
     const res = await fetch(`${API_BASE}/api/attendance`, {
       method: 'POST',
@@ -275,11 +287,13 @@ export default function AttendancePage() {
     return true
   }
 
-  // networks helpers
+  // networks helpers (normalized)
   const fetchNetworksAPI = async () => {
     const res = await fetch(`${API_BASE}/api/networks`)
     if (!res.ok) throw new Error('Failed to fetch networks')
-    return (await res.json()).data as OrganizationNetwork[]
+    const json = await res.json()
+    const list = Array.isArray(json?.data) ? json.data : []
+    return list.map(normalizeNetwork) as OrganizationNetwork[]
   }
   const createNetworkAPI = async (payload: Partial<OrganizationNetwork>) => {
     const res = await fetch(`${API_BASE}/api/networks`, {
@@ -288,7 +302,8 @@ export default function AttendancePage() {
       body: JSON.stringify(payload),
     })
     if (!res.ok) throw new Error('Create network failed')
-    return (await res.json()).data as OrganizationNetwork
+    const json = await res.json()
+    return normalizeNetwork(json.data) as OrganizationNetwork
   }
   const updateNetworkAPI = async (id: string, payload: Partial<OrganizationNetwork>) => {
     const res = await fetch(`${API_BASE}/api/networks/${id}`, {
@@ -297,12 +312,36 @@ export default function AttendancePage() {
       body: JSON.stringify(payload),
     })
     if (!res.ok) throw new Error('Update network failed')
-    return (await res.json()).data as OrganizationNetwork
+    const json = await res.json()
+    return normalizeNetwork(json.data) as OrganizationNetwork
   }
   const deleteNetworkAPI = async (id: string) => {
     const res = await fetch(`${API_BASE}/api/networks/${id}`, { method: 'DELETE' })
     if (!res.ok && res.status !== 204) throw new Error('Delete network failed')
     return true
+  }
+
+  // network UI helpers
+  const handleEditNetwork = (network: any) => {
+    setNetworkData({ name: network.name || '', ipAddress: network.ipAddress || '' })
+    setEditingNetworkId(network.id ?? network._id ?? null)
+    setIsEditingNetwork(true)
+    setIsNetworkDialogOpen(true)
+  }
+
+  const handleFetchIP = async () => {
+    try {
+      const response = await fetch('https://api.ipify.org?format=json')
+      if (response.ok) {
+        const data = await response.json()
+        setNetworkData((prev) => ({ ...prev, ipAddress: data.ip }))
+      } else {
+        setIPValidationError('Failed to fetch device IP')
+      }
+    } catch (err) {
+      console.error('Failed to fetch IP:', err)
+      setIPValidationError('Failed to fetch device IP')
+    }
   }
 
   const [todayAttendance, setTodayAttendance] = useState<Attendance[]>([])
@@ -516,6 +555,19 @@ export default function AttendancePage() {
       setDeleteConfirm(null)
     } catch (err) {
       console.error('Delete failed', err)
+    }
+  }
+
+
+  // NEW: Check-out handler — set checkOutTime to current time and persist
+  const handleCheckOut = async (id: string) => {
+    try {
+      const now = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
+      const updated = await updateAttendanceAPI(id, { checkOutTime: now })
+      setAttendance((prev) => prev.map((a) => (a.id === updated.id ? updated : a)))
+    } catch (err) {
+      console.error('Check-out failed', err)
+      alert('Failed to check out')
     }
   }
 
@@ -754,7 +806,7 @@ export default function AttendancePage() {
                 ) : (
                   filteredAttendance.map((record) => (
                     <div key={record.id} className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50">
-                      <div className="grid grid-cols-7 gap-4 mb-3">
+                      <div className="grid grid-cols-8 gap-4 mb-3">
                         <div>
                           <p className="text-xs text-gray-500">Profile</p>
                           <p className="text-lg">{record.profile}</p>
@@ -775,10 +827,32 @@ export default function AttendancePage() {
                           <p className="text-xs text-gray-500">Room</p>
                           <p className="text-sm">{record.room}</p>
                         </div>
+
+                        {/* NEW: Status column */}
+                        <div>
+                          <p className="text-xs text-gray-500">Status</p>
+                          <p className="text-sm">
+                            <span
+                              className={`inline-flex items-center px-2 py-0.5 rounded-full text-sm font-medium ${
+                                record.status === "present"
+                                  ? "bg-green-100 text-green-800"
+                                  : record.status === "late"
+                                  ? "bg-orange-100 text-orange-800"
+                                  : "bg-red-100 text-red-800"
+                              }`}
+                            >
+                              {record.status === "present" && <CheckCircle className="h-3 w-3 mr-1" />}
+                              {record.status === "late" && <AlertCircle className="h-3 w-3 mr-1" />}
+                              {record.status.charAt(0).toUpperCase() + record.status.slice(1)}
+                            </span>
+                          </p>
+                        </div>
+
                         <div>
                           <p className="text-xs text-gray-500">Shift</p>
                           <p className="text-sm">{record.shift}</p>
                         </div>
+
                         <div>
                           <p className="text-xs text-gray-500">Check In/Out</p>
                           <p className="text-sm font-medium">
@@ -787,36 +861,34 @@ export default function AttendancePage() {
                           </p>
                         </div>
                       </div>
-                      <div className="flex items-center justify-between gap-2">
-                        <span
-                          className={`px-3 py-1 rounded-full text-sm font-medium flex items-center gap-1 ${
-                            record.status === "present"
-                              ? "bg-green-100 text-green-800"
-                              : record.status === "late"
-                              ? "bg-orange-100 text-orange-800"
-                              : "bg-red-100 text-red-800"
-                          }`}
+
+                      <div className="flex items-center justify-end gap-2">
+                        <button
+                          onClick={() => handleEditAttendance(record)}
+                          className="px-3 py-1 text-sm border border-gray-300 rounded hover:bg-gray-100 flex items-center gap-1"
                         >
-                          {record.status === "present" && <CheckCircle className="h-3 w-3" />}
-                          {record.status === "late" && <AlertCircle className="h-3 w-3" />}
-                          {record.status.charAt(0).toUpperCase() + record.status.slice(1)}
-                        </span>
-                        <div className="flex gap-2">
+                          <Edit className="h-3 w-3" />
+                          Edit
+                        </button>
+
+                        {/* Check-out button (only shown when not checked out) */}
+                        {!record.checkOutTime && (
                           <button
-                            onClick={() => handleEditAttendance(record)}
-                            className="px-3 py-1 text-sm border border-gray-300 rounded hover:bg-gray-100 flex items-center gap-1"
+                            onClick={() => handleCheckOut(record.id)}
+                            className="px-3 py-1 text-sm bg-yellow-100 text-yellow-800 rounded hover:bg-yellow-200 flex items-center gap-1"
                           >
-                            <Edit className="h-3 w-3" />
-                            Edit
+                            <Clock className="h-3 w-3" />
+                            Check-Out
                           </button>
-                          <button
-                            onClick={() => setDeleteConfirm({ type: "attendance", id: record.id })}
-                            className="px-3 py-1 text-sm bg-red-100 text-red-700 rounded hover:bg-red-200 flex items-center gap-1"
-                          >
-                            <Trash2 className="h-3 w-3" />
-                            Delete
-                          </button>
-                        </div>
+                        )}
+
+                        <button
+                          onClick={() => setDeleteConfirm({ type: "attendance", id: record.id })}
+                          className="px-3 py-1 text-sm bg-red-100 text-red-700 rounded hover:bg-red-200 flex items-center gap-1"
+                        >
+                          <Trash2 className="h-3 w-3" />
+                          Delete
+                        </button>
                       </div>
                     </div>
                   ))

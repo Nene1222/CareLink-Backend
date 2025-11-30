@@ -8,9 +8,9 @@ const Navbar = () => {
   const current = location.pathname
 
   const tabs = [
-    { path: '/dashboard', label: 'Home', icon: HomeIcon},
-    { path: '/', label: 'Scan QR', icon: CameraIcon },
-    { path: '/', label: 'Profile', icon: User },
+    { path: '/dashboard', label: 'Home', icon: HomeIcon },
+    { path: '/attendance?mode=scan', label: 'Scan QR', icon: CameraIcon }, // changed route
+    { path: '/profile', label: 'Profile', icon: User },
     // { path: '/attendance', label: 'Attendance', icon: ClipboardList },
     // { path: '/appointment', label: 'Appointment', icon: Calendar },
   ]

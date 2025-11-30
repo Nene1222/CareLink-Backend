@@ -16,3 +16,5 @@ async function run() {
 }
 
 run()
+
+//to show about seeding fail or success on terminal

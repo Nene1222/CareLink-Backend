@@ -181,47 +181,72 @@ const SalesChart = () => {
   );
 };
 
-// ---- Calendar Widget ----
-const Calendar = () => {
-  const getDaysInMonth = (date: Date) => new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-  const getFirstDayOfMonth = (date: Date) => new Date(date.getFullYear(), date.getMonth(), 1).getDay();
-  
+// ---- Calendar Widget (robust) ----
+
+const Calendar: React.FC = () => {
+  const [viewDate, setViewDate] = useState<Date>(new Date());
+
+  const getDaysInMonth = (date: Date) =>
+    new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+
+  const getFirstDayOfMonth = (date: Date) =>
+    new Date(date.getFullYear(), date.getMonth(), 1).getDay(); // 0 = Sunday
+
+  const changeMonth = (delta: number) => {
+    setViewDate((d) => new Date(d.getFullYear(), d.getMonth() + delta, 1));
+  };
+
   const today = new Date();
-  const daysInMonth = getDaysInMonth(today);
-  const firstDay = getFirstDayOfMonth(today);
+  const daysInMonth = getDaysInMonth(viewDate);
+  const firstDayIndex = getFirstDayOfMonth(viewDate);
   const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
+  const monthLabel = viewDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 
   return (
     <div className="calendar-widget">
-      <div className="calendar-header">
-        <span>📅 Cambodia Holidays</span>
-      </div>
+      <div className="calendar-header">📅 Cambodia Holidays</div>
+
       <div className="calendar-nav">
-        <button className="nav-btn">‹</button>
-        <span className="calendar-month">November 2025</span>
-        <button className="nav-btn">›</button>
+        <button className="nav-btn" onClick={() => changeMonth(-1)} aria-label="Previous month">‹</button>
+        <span className="calendar-month">{monthLabel}</span>
+        <button className="nav-btn" onClick={() => changeMonth(1)} aria-label="Next month">›</button>
       </div>
+
       <div className="calendar-weekdays">
-        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-          <div key={day} className="weekday">{day}</div>
+        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((d) => (
+          <div key={d} className="weekday">{d}</div>
         ))}
       </div>
-      <div className="calendar-grid">
-        {Array.from({ length: firstDay }).map((_, i) => (
-          <div key={`empty-${i}`} className="calendar-day empty"></div>
+
+      <div className="calendar-grid" role="grid" aria-label={`Calendar for ${monthLabel}`}>
+        {/* leading empty slots */}
+        {Array.from({ length: firstDayIndex }).map((_, i) => (
+          <div key={`empty-${i}`} className="calendar-day empty" />
         ))}
-        {days.map(day => (
-          <div
-            key={day}
-            className={`calendar-day ${day === today.getDate() ? 'today' : ''}`}
-          >
-            {day}
-          </div>
-        ))}
+
+        {/* actual days */}
+        {days.map((day) => {
+          const isToday =
+            day === today.getDate() &&
+            viewDate.getMonth() === today.getMonth() &&
+            viewDate.getFullYear() === today.getFullYear();
+
+          return (
+            <div
+              key={day}
+              className={`calendar-day ${isToday ? 'today' : ''}`}
+              role="gridcell"
+              aria-selected={isToday}
+            >
+              <span className="day-number">{day}</span>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
 };
+
 
 // ---- Attendance Trends ----
 const AttendanceTrends = () => (
@@ -270,20 +295,28 @@ const AttendanceTrends = () => (
 const QuickAccess = () => (
   <div className="quick-access">
     <div className="quick-header">Quick Access</div>
-    <div className="quick-grid">
-      <div className="quick-item" style={{ backgroundColor: '#3b82f6' }}>
-        <span className="quick-icon">🛒</span>
-      </div>
-      <div className="quick-item" style={{ backgroundColor: '#10b981' }}>
-        <span className="quick-icon">✓</span>
-      </div>
-      <div className="quick-item" style={{ backgroundColor: '#a855f7' }}>
-        <span className="quick-icon">📝</span>
-      </div>
-      <div className="quick-item" style={{ backgroundColor: '#f97316' }}>
-        <span className="quick-icon">⚙️</span>
-      </div>
-    </div>
+<div className="quick-grid">
+  <div className="quick-item" style={{ backgroundColor: '#3b82f6' }}>
+    <span className="quick-icon">🛒</span>
+    <div className="quick-label">POS System</div>
+  </div>
+
+  <div className="quick-item" style={{ backgroundColor: '#10b981' }}>
+    <span className="quick-icon">✓</span>
+    <div className="quick-label">Attendance</div>
+  </div>
+
+  <div className="quick-item" style={{ backgroundColor: '#a855f7' }}>
+    <span className="quick-icon">📝</span>
+    <div className="quick-label">Medical record</div>
+  </div>
+
+  <div className="quick-item" style={{ backgroundColor: '#f97316' }}>
+    <span className="quick-icon">💊</span>
+    <div className="quick-label">Inventory</div>
+  </div>
+</div>
+
   </div>
 );
 
