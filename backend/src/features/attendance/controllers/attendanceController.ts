@@ -2,8 +2,8 @@
 import { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import { Attendance } from '../models/attendance';
-import { Organization } from '../models/organization';
-import { Network } from '../models/network' // added
+import { Organization } from '../../../models/organization';
+import { Network } from '../../../models/network' // added
 
 export class AttendanceController {
   private normalize(doc: any) {
@@ -105,7 +105,7 @@ export class AttendanceController {
       }
 
       const doc = await Attendance.create(createPayload)
-      const created = await Attendance.findById(doc._id).populate('organizationId').populate('networkId').lean()
+      const created = await Attendance.findById((doc as any)._id).populate('organizationId').populate('networkId').lean()
       res.status(201).json({ data: this.normalize(created) })
     } catch (err: any) {
       console.error(err)

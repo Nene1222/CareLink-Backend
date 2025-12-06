@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import MainLayout from './components/MainLayout';
 import Home from './pages/dashboard';
-import AttendancePage from './pages/attendance';
-import { AppointmentsPage } from './pages/appointment'; 
+import AttendancePage from './features/attendance/attendance';
+import { AppointmentsPage } from './features/appointment/appointment'; 
 import './App.css';
 
 function App() {

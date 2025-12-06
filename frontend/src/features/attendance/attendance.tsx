@@ -1064,6 +1064,25 @@ const handleAskPermission = async (id: string) => {
             <Edit style={{ height: '16px', width: '16px' }} />
           </button>
 
+          {/* Ask Permission Button */}
+          <button
+            onClick={() => handleAskPermission(record.id)}
+            style={{
+              padding: '8px',
+              color: record.approval === 'pending' ? '#f59e0b' : '#9ca3af',
+              borderRadius: '6px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transition: 'all 0.2s',
+              backgroundColor: record.approval === 'pending' ? '#fef3c7' : 'transparent'
+            }}
+            className="hover:text-orange-600 hover:bg-orange-50"
+            title="Ask Permission"
+          >
+            <Send style={{ height: '16px', width: '16px' }} />
+          </button>
+
           {!record.checkOutTime && (
             <button
               onClick={() => handleCheckOut(record.id)}

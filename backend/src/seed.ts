@@ -1,8 +1,8 @@
 // backend/src/seed.ts
-import { Attendance } from './models/attendance'
+import { Attendance } from './features/attendance/models/attendance'
 import { Organization } from './models/organization'
 import { Network } from './models/network'
-import { Appointment } from './models/appointment'
+import { Appointment } from './features/appointment/models/appointment'
 
 export async function seedDatabase() {
   try {

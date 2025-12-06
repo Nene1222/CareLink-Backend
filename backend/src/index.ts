@@ -1,10 +1,10 @@
 import dotenv from 'dotenv'
 import express from 'express'
 import cors from 'cors'
-import attendanceRouter from './routes/attendance'
+import attendanceRouter from './features/attendance/routes/attendance'
 import organizationsRouter from './routes/organizations'
 import networksRouter from './routes/networks'
-import appointmentsRouter from './routes/appointments'
+import appointmentsRouter from './features/appointment/routes/appointments'
 import { connectDb } from './db'
 import { seedDatabase } from './seed' // <-- new
 
