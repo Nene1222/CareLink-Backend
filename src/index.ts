@@ -7,6 +7,11 @@ import networksRouter from './routes/networks'
 import appointmentsRouter from './features/appointment/routes/appointments'
 import { connectDb } from './db'
 import { seedDatabase } from './seed' // <-- new
+import auth from './models/Authentication/routes/index'
+
+
+
+
 
 dotenv.config()
 
@@ -20,6 +25,11 @@ app.use('/api/attendance', attendanceRouter)
 app.use('/api/organizations', organizationsRouter)
 app.use('/api/networks', networksRouter)
 app.use('/api/appointments', appointmentsRouter)
+
+// Register all API routes
+app.use("/api/auth", auth);
+
+
 
 app.get('/health', (_req, res) => res.json({ ok: true }))
 
