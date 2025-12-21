@@ -22,7 +22,7 @@ const MedicineSchema = new Schema<IMedicine>(
     barcode_value: { type: String, default: null },
     deleted_at: { type: Date, default: null },
   },
-  { timestamps: true }
+  { timestamps: true, collection: 'medicine', }
 )
 
 MedicineSchema.index({ group_medicine_id: 1 })

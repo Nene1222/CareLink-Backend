@@ -24,7 +24,7 @@ const BatchSchema = new Schema<IBatch>(
     setting_price: { type: Number, required: true, min: 0 },
     deleted_at: { type: Date, default: null },
   },
-  { timestamps: true }
+  { timestamps: true, collection: 'batch', }
 )
 
 BatchSchema.index({ medicine_id: 1 })
