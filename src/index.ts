@@ -23,6 +23,7 @@ const PORT = Number(process.env.PORT || 3000)
 
 app.use(cors())
 app.use(express.json())
+app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')))
 
 app.use('/api/attendance', attendanceRouter)
 app.use('/api/organizations', organizationsRouter)

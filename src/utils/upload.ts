@@ -48,20 +48,27 @@ import path from 'path'
 import fs from 'fs'
 import type { Request } from 'express'
 
-// Ensure uploads directory exists
-const uploadsDir = path.join(process.cwd(), 'uploads', 'barcodes')
-if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir, { recursive: true })
+const uploadsBaseDir = path.join(process.cwd(), 'uploads')
+const barcodeDir = path.join(uploadsBaseDir, 'barcodes')
+const productDir = path.join(uploadsBaseDir, 'products')
+
+// Ensure upload directories exist
+for (const dir of [uploadsBaseDir, barcodeDir, productDir]) {
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true })
+  }
 }
 
-// Configure storage
+// Configure storage for both barcode and product images
 const storage = multer.diskStorage({
-  destination: (_req: Request, _file: Express.Multer.File, cb) => {
-    cb(null, uploadsDir)
+  destination: (_req: Request, file: Express.Multer.File, cb) => {
+    const targetDir = file.fieldname === 'photo' ? productDir : barcodeDir
+    cb(null, targetDir)
   },
   filename: (_req: Request, file: Express.Multer.File, cb) => {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9)
-    cb(null, 'barcode-' + uniqueSuffix + path.extname(file.originalname))
+    const prefix = file.fieldname === 'photo' ? 'product-' : 'barcode-'
+    cb(null, prefix + uniqueSuffix + path.extname(file.originalname))
   }
 })
 
@@ -78,7 +85,7 @@ const fileFilter = (
   }
 }
 
-export const uploadBarcode = multer({
+const upload = multer({
   storage,
   fileFilter,
   limits: {
@@ -86,10 +93,21 @@ export const uploadBarcode = multer({
   }
 })
 
+// Reuse the same multer instance for barcode-only or mixed uploads
+export const uploadBarcode = upload
+export const uploadMedicineImages = upload
+
 // Helper to get file URL/path for storage in DB
 export const getBarcodeImageUrl = (
   filename: string | null | undefined
 ): string | null => {
   if (!filename) return null
-  return filename
+  return `barcodes/${filename}`
+}
+
+export const getProductImageUrl = (
+  filename: string | null | undefined
+): string | null => {
+  if (!filename) return null
+  return `products/${filename}`
 }

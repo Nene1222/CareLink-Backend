@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import { Medicine } from '../../models/medical/medicine'
 import { GroupMedicine } from '../../models/medical/groupMedicine'
 import { Batch } from '../../models/medical/batch'
-import { getBarcodeImageUrl } from '../../utils/upload'
+import { getBarcodeImageUrl, getProductImageUrl } from '../../utils/upload'
 import { generateBarcodeValueFromImage } from '../../utils/barcodeExtractor'
 
 export class MedicineController {
@@ -104,26 +104,34 @@ export class MedicineController {
         return res.status(400).json({ error: 'Invalid group_medicine_id' })
       }
       
-      // Handle barcode image upload
+      // Handle uploaded files (barcode_image and photo)
+      const files = req.files as { [fieldname: string]: Express.Multer.File[] } | undefined
+      const barcodeFile = files?.barcode_image?.[0]
+      const photoFile = files?.photo?.[0]
+
       let barcode_image = null
       let barcode_value = null
-      
-      if (req.file) {
-        barcode_image = getBarcodeImageUrl(req.file.filename)
-        // Extract barcode value from image
+      let product_photo = photo ?? null
+
+      if (barcodeFile) {
+        barcode_image = getBarcodeImageUrl(barcodeFile.filename)
         try {
-          barcode_value = await generateBarcodeValueFromImage(req.file.path)
+          barcode_value = await generateBarcodeValueFromImage(barcodeFile.path)
         } catch (error) {
           console.error('Error extracting barcode value:', error)
           // Continue without barcode value if extraction fails
         }
+      }
+
+      if (photoFile) {
+        product_photo = getProductImageUrl(photoFile.filename)
       }
       
       const medicine = await Medicine.create({
         group_medicine_id,
         name,
         description,
-        photo,
+        photo: product_photo,
         barcode_image,
         barcode_value,
         deleted_at,
@@ -148,18 +156,23 @@ export class MedicineController {
       const medicine = await Medicine.findById(req.params.id)
       if (!medicine) return res.status(404).json({ error: 'Medicine not found' })
 
+      // Handle uploaded files (barcode_image and photo)
+      const files = req.files as { [fieldname: string]: Express.Multer.File[] } | undefined
+      const barcodeFile = files?.barcode_image?.[0]
+      const photoFile = files?.photo?.[0]
+
       if (group_medicine_id !== undefined) medicine.group_medicine_id = group_medicine_id
       if (name !== undefined) medicine.name = name
       if (description !== undefined) medicine.description = description
       if (photo !== undefined) medicine.photo = photo
+      if (photoFile) medicine.photo = getProductImageUrl(photoFile.filename)
       if (deleted_at !== undefined) medicine.deleted_at = deleted_at
       
       // Handle barcode image upload
-      if (req.file) {
-        medicine.barcode_image = getBarcodeImageUrl(req.file.filename)
-        // Extract barcode value from image
+      if (barcodeFile) {
+        medicine.barcode_image = getBarcodeImageUrl(barcodeFile.filename)
         try {
-          medicine.barcode_value = await generateBarcodeValueFromImage(req.file.path)
+          medicine.barcode_value = await generateBarcodeValueFromImage(barcodeFile.path)
         } catch (error) {
           console.error('Error extracting barcode value:', error)
           // Continue without updating barcode value if extraction fails
