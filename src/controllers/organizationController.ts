@@ -40,6 +40,15 @@ export class OrganizationController {
       const { name, type, recordType, network, logo } = req.body
       if (!name) return res.status(400).json({ error: 'name is required' })
 
+      // LIMITATION: Only ONE organization is allowed for the attendance system
+      const existingOrganization = await Organization.findOne({})
+      if (existingOrganization) {
+        return res.status(400).json({
+          error: 'Only one organization is allowed in the attendance system. An organization already exists.',
+          existingOrganization: this.normalize(existingOrganization.toObject())
+        })
+      }
+
       // resolve or create network
       let networkId: any = undefined
       if (network) {

@@ -14,7 +14,11 @@ export interface IAttendance extends Document {
   checkOutTime?: string
   date: string
   status: 'present' | 'absent' | 'late'
-  approval?: 'pending' | 'accepted' | 'rejected'
+  approval?: 'pending' | 'ask_permission' | 'accepted' | 'rejected'
+  requestedBy?: string
+  requestedAt?: Date
+  requestReason?: string
+  requestImage?: string
   notes?: string
 }
 
@@ -33,7 +37,11 @@ const AttendanceSchema = new Schema<IAttendance>(
     checkOutTime: String,
     date: { type: String, required: true },
     status: { type: String, enum: ['present', 'absent', 'late'], default: 'present' },
-    approval: { type: String, enum: ['pending', 'accepted', 'rejected'], default: 'pending' },
+    approval: { type: String, enum: ['pending', 'ask_permission', 'accepted', 'rejected'], default: 'pending' },
+    requestedBy: String,
+    requestedAt: Date,
+    requestReason: String,
+    requestImage: String,
     notes: String,
   },
   { timestamps: true }

@@ -54,7 +54,6 @@ export async function seedDatabase() {
           checkInTime: '08:45 AM',
           date: defaultDate,
           status: 'present',
-          approval: 'accepted',
         },
         {
           profile: '👨‍⚕️',
@@ -68,7 +67,6 @@ export async function seedDatabase() {
           checkInTime: '09:15 AM',
           date: defaultDate,
           status: 'late',
-          approval: 'pending',
         },
         {
           profile: '👩‍⚕️',
@@ -83,7 +81,6 @@ export async function seedDatabase() {
           checkOutTime: '05:30 PM',
           date: defaultDate,
           status: 'present',
-          approval: 'accepted',
         },
       ]
       await Attendance.insertMany(attendances)
