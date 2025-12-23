@@ -11,7 +11,6 @@ import medicinesRouter from './routes/medicines'
 import batchesRouter from './routes/medical/batches'
 import barcodeRouter from './routes/medical/barcode'
 import medicalRecordsRouter from './routes/medical/medicalRecords'
-import authRouter from './routes/auth'
 import { connectDb } from './db'
 import { seedDatabase } from './seed' // <-- new
 // Import MedicalRecord model to ensure it's registered with Mongoose
@@ -25,7 +24,6 @@ const PORT = Number(process.env.PORT || 3000)
 app.use(cors())
 app.use(express.json())
 
-app.use('/api/auth', authRouter)
 app.use('/api/attendance', attendanceRouter)
 app.use('/api/organizations', organizationsRouter)
 app.use('/api/networks', networksRouter)
