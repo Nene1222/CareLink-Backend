@@ -53,14 +53,20 @@ export const createInvoice = async (req: Request, res: Response) => {
   try {
     const { invoiceId, customerPhone, date, subtotal, tax, total, items } = req.body;
 
-    // 1️⃣ Save invoice
-    const invoice = new Invoice(
-      { invoiceId, customerPhone, date, subtotal, tax, total },
-      { session }
-    );
-    await invoice.save();
+    // ✅ 1. Create invoice WITHOUT session
+    const invoice = new Invoice({
+      invoiceId,
+      customerPhone,
+      date,
+      subtotal,
+      tax,
+      total,
+    });
 
-    // 2️⃣ Save invoice details
+    // ✅ 2. Pass session here
+    await invoice.save({ session });
+
+    // ✅ 3. Invoice details
     const invoiceDetails = items.map((item: any) => ({
       invoiceId,
       itemId: item.itemId,
@@ -72,7 +78,7 @@ export const createInvoice = async (req: Request, res: Response) => {
 
     await InvoiceDetail.insertMany(invoiceDetails, { session });
 
-    // 3️⃣ Update medicine stock via Batch (FIFO / earliest expiry)
+    // ✅ 4. Batch stock update
     for (const item of items) {
       if (item.type !== "medicine") continue;
 
@@ -83,14 +89,13 @@ export const createInvoice = async (req: Request, res: Response) => {
         quantity: { $gt: 0 },
         deleted_at: null,
       })
-        .sort({ expiry_date: 1 }) // FEFO
+        .sort({ expiry_date: 1 })
         .session(session);
 
       for (const batch of batches) {
         if (remainingQty <= 0) break;
 
         const deductQty = Math.min(batch.quantity, remainingQty);
-
         batch.quantity -= deductQty;
         remainingQty -= deductQty;
 
@@ -121,6 +126,7 @@ export const createInvoice = async (req: Request, res: Response) => {
     });
   }
 };
+
 
 
 
