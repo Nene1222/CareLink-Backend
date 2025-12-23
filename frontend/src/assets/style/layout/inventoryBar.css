@@ -1,0 +1,142 @@
+.inventory-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    width: 100%;
+  }
+  
+  .inventory-bar-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+  }
+  
+  .back-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+    flex-shrink: 0;
+  }
+  
+  .back-button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .back-button svg {
+    width: 24px;
+    height: 24px;
+    color: #333;
+  }
+  
+  .inventory-title {
+    font-size: 48px;
+    font-weight: 700;
+    color: #000;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+  }
+  
+  .inventory-subtitle {
+    font-size: 18px;
+    color: #666;
+    font-weight: 400;
+    margin: 0;
+    line-height: 1.4;
+  }
+  
+  .inventory-bar-right {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  
+  .search-box {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 12px 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e0e0e0;
+    min-width: 300px;
+    gap: 12px;
+  }
+  
+  .search-icon {
+    font-size: 20px;
+    color: #666;
+    flex-shrink: 0;
+  }
+  
+  .search-input {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #333;
+    flex: 1;
+    background: transparent;
+    font-family: inherit;
+  }
+  
+  .search-input::placeholder {
+    color: #999;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 968px) {
+    .inventory-bar {
+      flex-direction: column;
+      gap: 20px;
+      align-items: flex-start;
+    }
+  
+    .inventory-title {
+      font-size: 36px;
+    }
+  
+    .inventory-subtitle {
+      font-size: 16px;
+    }
+  
+    .search-box {
+      width: 100%;
+      min-width: 100%;
+    }
+  
+    .inventory-bar-right {
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .inventory-title {
+      font-size: 28px;
+    }
+  
+    .inventory-subtitle {
+      font-size: 14px;
+    }
+  
+    .back-button {
+      width: 36px;
+      height: 36px;
+    }
+  
+    .back-button svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  
+  

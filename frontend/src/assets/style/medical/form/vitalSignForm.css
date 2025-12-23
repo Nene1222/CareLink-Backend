@@ -1,0 +1,79 @@
+.vital-signs-wrapper, .vital-signs-container {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    min-height: unset !important;
+    margin: 0 !important;
+  }
+  
+  .vital-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 16px;
+  }
+  .vital-icon {
+    width: 54px;
+    height: 54px;
+    background: #e1faf0;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .vital-icon svg { width: 34px; height: 34px; color: #37a574; }
+  .vital-header-text { flex: 1; }
+  .vital-title { font-size: 1.7rem; font-weight: 700; color: #232323; margin: 0 0 2px 0; }
+  .vital-subtitle { font-size: 15px; color: #8a8a8a; margin: 0; font-weight: 600; }
+  
+  .vital-content { display: flex; flex-direction: column; gap: 24px; }
+  
+  .vital-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 22px; margin-bottom: 0; }
+  .vital-row:first-child { grid-template-columns: repeat(4,1fr); }
+  
+  .vital-field { display: flex; flex-direction: column; gap: 4px; }
+  .vital-label { font-size: 1.12rem; font-weight: bold; color: #181818; margin-bottom: 0px; }
+  
+  .vital-input {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 1.05rem;
+    border: none;
+    background: #f4f3f3;
+    font-weight: 500;
+    border-radius: 16px;
+    color: #191919;
+    margin-bottom: 1px;
+    transition: box-shadow .11s;
+    outline: none;
+    box-shadow: none;
+  }
+  .vital-input:focus { background: #ececec; box-shadow: 0 0 0 1.5px #b5c8e7; }
+  
+  .input-with-dropdown { display: flex; align-items: center; background: #f4f3f3; border-radius: 16px; overflow: hidden; }
+  .input-with-dropdown .vital-input { border-radius: 0; background: transparent; padding-right: 2px; }
+  .vital-dropdown {
+    padding: 14px 14px;
+    font-size: 1.05rem;
+    border: none;
+    background-color: transparent;
+    color: #383c3f;
+    outline: none;
+    cursor: pointer;
+    min-width: 60px;
+    border-radius: 0 16px 16px 0;
+  }
+  
+  .input-with-unit { display: flex; align-items: center; background: #f4f3f3; border-radius: 16px; overflow: hidden; position: relative; }
+  .input-with-unit .vital-input { border-radius: 16px; background: transparent; padding-right: 45px; }
+  .unit-label { position: absolute; right: 16px; font-size: 1rem; color: #787878; font-weight: 500; pointer-events: none; }
+  
+  @media (max-width: 968px) {
+    .vital-header { flex-direction: column; text-align: center; gap: 10px; }
+    .vital-icon { width: 33px; height: 33px; }
+    .vital-icon svg { width: 17px; height: 17px; }
+    .vital-title { font-size: 1.11rem; }
+    .vital-row, .vital-row:first-child { grid-template-columns: 1fr 1fr; gap: 10px; }
+  }

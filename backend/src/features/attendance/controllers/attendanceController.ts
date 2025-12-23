@@ -4,11 +4,12 @@ import mongoose from 'mongoose';
 import { Attendance } from '../models/attendance';
 import { Organization } from '../../../models/organization';
 import { Network } from '../../../models/network' // added
+import pusher from '../../../pusher';
 
 export class AttendanceController {
   private normalize(doc: any) {
     if (!doc) return null;
-    const { _id, __v, organizationId, networkId, organization, approval, ...rest } = doc;
+    const { _id, __v, organizationId, networkId, organization, ...rest } = doc;
 
     const orgPop = organizationId && typeof organizationId === 'object' && (organizationId as any).name ? organizationId as any : null;
     const netPop = networkId && typeof networkId === 'object' && (networkId as any).name ? networkId as any : null;
@@ -20,7 +21,6 @@ export class AttendanceController {
       organizationId: orgPop ? String(orgPop._id) : (organizationId ? String((organizationId as any)._id ?? organizationId) : undefined),
       networkId: netPop ? String(netPop._id) : (networkId ? String((networkId as any)._id ?? networkId) : undefined),
       networkName: netPop ? netPop.name : undefined,
-      approval: approval || 'pending',
     };
   }
 
@@ -100,12 +100,27 @@ export class AttendanceController {
         checkOutTime: body.checkOutTime,
         date: body.date,
         status: body.status || 'present',
-        approval: body.approval || 'pending',
         notes: body.notes,
       }
 
       const doc = await Attendance.create(createPayload)
       const created = await Attendance.findById((doc as any)._id).populate('organizationId').populate('networkId').lean()
+      
+      // Trigger Pusher notification for attendance created (non-blocking)
+      try {
+        await pusher.trigger('attendance-channel', 'attendance-updated', {
+          type: 'created',
+          attendanceId: String((doc as any)._id),
+          userId: body.staffId,
+          name: body.name,
+          checkInTime: body.checkInTime,
+          timestamp: new Date(),
+          message: `${body.name} (${body.staffId}) checked in at ${body.checkInTime}`,
+        })
+      } catch (pErr) {
+        console.error('Pusher trigger failed (create):', pErr)
+      }
+      
       res.status(201).json({ data: this.normalize(created) })
     } catch (err: any) {
       console.error(err)
@@ -155,6 +170,30 @@ export class AttendanceController {
         .populate('networkId')
         .lean()
       if (!updated) return res.status(404).json({ error: 'Not found' })
+      
+      // Determine notification type
+      let notificationType = 'updated'
+      let notificationMessage = `${updated.name} record updated`
+      
+      if (body.checkOutTime && !body.checkOutTime.isEmpty) {
+        notificationType = 'checkout'
+        notificationMessage = `${updated.name} checked out at ${body.checkOutTime}`
+      }
+      
+      // Trigger Pusher notification (non-blocking)
+      try {
+        await pusher.trigger('attendance-channel', 'attendance-updated', {
+          type: notificationType,
+          attendanceId: String(updated._id),
+          userId: updated.staffId,
+          name: updated.name,
+          timestamp: new Date(),
+          message: notificationMessage,
+        })
+      } catch (pErr) {
+        console.error('Pusher trigger failed (update):', pErr)
+      }
+      
       res.json({ data: this.normalize(updated) })
     } catch (err) {
       console.error(err)
@@ -171,6 +210,90 @@ export class AttendanceController {
     } catch (err) {
       console.error(err);
       res.status(500).json({ error: 'Failed to delete attendance' });
+    }
+  }
+
+  // NEW: Checkout method
+  async checkOut(req: Request, res: Response) {
+    try {
+      if (!mongoose.Types.ObjectId.isValid(req.params.id)) return res.status(400).json({ error: 'Invalid id' });
+      
+      const checkOutTime = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+      
+      const updated = await Attendance.findByIdAndUpdate(
+        req.params.id,
+        { checkOutTime },
+        { new: true }
+      )
+        .populate('organizationId')
+        .populate('networkId')
+        .lean();
+      
+      if (!updated) return res.status(404).json({ error: 'Not found' });
+      
+      // Trigger Pusher notification for checkout (non-blocking)
+      try {
+        await pusher.trigger('attendance-channel', 'attendance-updated', {
+          type: 'checkout',
+          attendanceId: String(updated._id),
+          userId: updated.staffId,
+          name: updated.name,
+          checkOutTime,
+          timestamp: new Date(),
+          message: `${updated.name} checked out at ${checkOutTime}`,
+        });
+      } catch (pErr) {
+        console.error('Pusher trigger failed (checkout):', pErr)
+      }
+      
+      res.json({ data: this.normalize(updated) });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Failed to checkout' });
+    }
+  }
+
+  // NEW: Approval update method
+  async updateApproval(req: Request, res: Response) {
+    try {
+      if (!mongoose.Types.ObjectId.isValid(req.params.id)) return res.status(400).json({ error: 'Invalid id' });
+
+      const { approval } = req.body;
+
+      if (!approval || !['accepted', 'rejected', 'pending'].includes(approval)) {
+        return res.status(400).json({ error: 'Approval must be "accepted", "rejected", or "pending"' });
+      }
+
+      const updated = await Attendance.findByIdAndUpdate(
+        req.params.id,
+        { approval },
+        { new: true }
+      )
+        .populate('organizationId')
+        .populate('networkId')
+        .lean();
+
+      if (!updated) return res.status(404).json({ error: 'Attendance record not found' });
+
+      // Trigger Pusher notification for approval update (non-blocking)
+      try {
+        await pusher.trigger('attendance-channel', 'attendance-updated', {
+          type: approval === 'accepted' ? 'approved' : approval === 'rejected' ? 'rejected' : 'pending',
+          attendanceId: String(updated._id),
+          userId: updated.staffId,
+          name: updated.name,
+          approval,
+          timestamp: new Date(),
+          message: `Attendance ${approval} for ${updated.name}`,
+        });
+      } catch (pErr) {
+        console.error('Pusher trigger failed (approval):', pErr)
+      }
+
+      res.json({ data: this.normalize(updated) });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Failed to update approval status' });
     }
   }
 }

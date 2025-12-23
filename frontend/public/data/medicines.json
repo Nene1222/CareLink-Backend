@@ -1,0 +1,62 @@
+[
+  {
+    "_id": "med_001",
+    "image": "https://images.pexels.com/photos/208512/pexels-photo-208512.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "name": "Paracetamol 500mg",
+    "type": "Analgesic",
+    "price": 0.01,
+    "barcode": "8851932417464",
+    "quantity": 24,
+    "expireDate": ["2026-05-01", "2026-12-01"]
+  },
+  {
+    "_id": "med_002",
+    "image": "https://images.pexels.com/photos/3683056/pexels-photo-3683056.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "name": "Amoxicillin 250mg",
+    "type": "Antibiotic",
+    "price": 5.0,
+    "barcode": "0123456789013",
+    "quantity": 8,
+    "expireDate": ["2025-12-01"]
+  },
+  {
+    "_id": "med_003",
+    "image": "https://images.pexels.com/photos/3683041/pexels-photo-3683041.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "name": "Ibuprofen 400mg",
+    "type": "Anti-inflammatory",
+    "price": 3.5,
+    "barcode": "0123456789014",
+    "quantity": 0,
+    "expireDate": []
+  },
+  {
+    "_id": "med_004",
+    "image": "https://images.pexels.com/photos/6824327/pexels-photo-6824327.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "name": "Cetirizine 10mg",
+    "type": "Antihistamine",
+    "price": 1.5,
+    "barcode": "0123456789015",
+    "quantity": 50,
+    "expireDate": ["2027-03-01"]
+  },
+  {
+    "_id": "med_005",
+    "image": "https://images.pexels.com/photos/3683080/pexels-photo-3683080.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "name": "Metformin 500mg",
+    "type": "Antidiabetic",
+    "price": 4.0,
+    "barcode": "0123456789016",
+    "quantity": 15,
+    "expireDate": ["2026-08-01"]
+  },
+  {
+    "_id": "med_006",
+    "image": "https://images.pexels.com/photos/3683101/pexels-photo-3683101.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "name": "Omeprazole 20mg",
+    "type": "Antacid",
+    "price": 3.0,
+    "barcode": "0123456789017",
+    "quantity": 32,
+    "expireDate": ["2026-06-01", "2027-01-01"]
+  }
+]

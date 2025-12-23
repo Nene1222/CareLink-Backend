@@ -6,11 +6,14 @@ import {
   Settings,
   LogOut,
   UserCheck2,
+  ShoppingCart,
+  User
 } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 const MenuSideBar: React.FC = () => {
   const location = useLocation();
+
   const [activeItem, setActiveItem] = useState(location.pathname || '/dashboard');
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -18,19 +21,23 @@ const MenuSideBar: React.FC = () => {
     setActiveItem(location.pathname);
   }, [location.pathname]);
 
-  const menuItems = [
+  const baseMenuItems = [
     { path: '/dashboard', label: 'Dashboard', icon: Home },
+    { path: '/POS', label: 'POS', icon: ShoppingCart },
     { path: '/attendance', label: 'Attendance', icon: UserCheck2 },
     { path: '/appointment', label: 'Appointment', icon: CalendarIcon },
     { path: '/medical-record', label: 'Medical Record', icon: ClipboardList },
     { path: '/inventory', label: 'Inventory Management', icon: Settings },
+    { path: '/profile', label: 'Profile', icon: User },
   ];
+
+  const menuItems = baseMenuItems;
 
   return (
     <aside
       className={`sidebar ${isExpanded ? 'expanded' : ''}`}
-      onMouseEnter={() => setIsExpanded(true)}
-      onMouseLeave={() => setIsExpanded(false)}
+      onMouseEnter={() => { console.log('MenuSideBar: mouse enter'); setIsExpanded(true); }}
+      onMouseLeave={() => { console.log('MenuSideBar: mouse leave'); setIsExpanded(false); }}
     >
       <div className="sidebar-header">
         <div className="sidebar-logo">
@@ -88,11 +95,13 @@ const MenuSideBar: React.FC = () => {
           display: flex;
           flex-direction: column;
           padding: 20px 8px;
-          z-index: 100;
+          z-index: 1000; /* increased z-index for debugging */
           box-shadow: 4px 0 24px rgba(0, 0, 0, 0.3);
           border-right: 1px solid rgba(148, 163, 184, 0.06);
           transition: width 0.28s cubic-bezier(0.4, 0, 0.2, 1);
           overflow: hidden;
+          outline: 1px dashed rgba(255,255,255,0.06); /* temporary visual debug */
+          pointer-events: auto; /* ensure pointer events enabled */
         }
 
         .sidebar.expanded {

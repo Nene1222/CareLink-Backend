@@ -640,6 +640,75 @@ video {
   object-fit: cover;
 }
 
+/* Scan line overlay for camera preview */
+.camera-preview-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.camera-preview-wrapper .scan-line {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, rgba(37,99,235,0) 0%, rgba(37,99,235,0.95) 50%, rgba(37,99,235,0) 100%);
+  box-shadow: 0 0 8px rgba(59,130,246,0.6);
+  pointer-events: none;
+  top: 0;
+  animation: scanMove 2.2s linear infinite;
+  z-index: 40;
+}
+
+@keyframes scanMove {
+  0% { top: 0; }
+  50% { top: calc(100% - 3px); }
+  100% { top: 0; }
+}
+
+/* QR alignment frame */
+.qr-frame {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  max-width: 420px;
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
+  border: 2px solid rgba(255,255,255,0.08);
+  box-shadow: 0 6px 30px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.02);
+  z-index: 20;
+  pointer-events: none;
+}
+
+.qr-frame .corner {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  box-sizing: border-box;
+  border: 3px solid rgba(37,99,235,0.95);
+  background: transparent;
+  border-radius: 4px;
+  z-index: 22;
+}
+
+.qr-frame .top-left { left: -12px; top: -12px; border-right: none; border-bottom: none; }
+.qr-frame .top-right { right: -12px; top: -12px; border-left: none; border-bottom: none; }
+.qr-frame .bottom-left { left: -12px; bottom: -12px; border-right: none; border-top: none; }
+.qr-frame .bottom-right { right: -12px; bottom: -12px; border-left: none; border-top: none; }
+
+/* subtle pulse for frame when active */
+.qr-frame.pulse {
+  animation: framePulse 1.8s ease-in-out infinite;
+}
+
+@keyframes framePulse {
+  0% { box-shadow: 0 6px 30px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.02); }
+  50% { box-shadow: 0 10px 40px rgba(6,182,212,0.12), inset 0 0 0 1px rgba(255,255,255,0.03); }
+  100% { box-shadow: 0 6px 30px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.02); }
+}
+
 /* Camera Controls Clean Style */
 .bg-gray-600 {
   background: #4b5563;
@@ -922,4 +991,103 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 
 .hover\:bg-gray-200:hover {
   background-color: #e5e7eb;
+}
+
+/* Cool "searching QR on the internet" line */
+.qr-search-line{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 14px;
+  border-radius:9999px;
+  background: linear-gradient(90deg,#06b6d4,#7c3aed,#ef4444);
+  background-size:200% 100%;
+  color:#fff;
+  font-weight:600;
+  box-shadow:0 8px 30px rgba(124,58,237,0.12);
+  cursor:pointer;
+  transition:transform .18s ease, box-shadow .18s ease;
+  animation:gradientShift 6s linear infinite;
+}
+.qr-search-line::before{ content:'🔎'; font-size:16px; display:inline-block; }
+.qr-search-line .label{ font-size:13px; }
+.qr-search-line .status{
+  margin-left:6px;
+  font-size:12px;
+  background: rgba(255,255,255,0.12);
+  padding:4px 8px;
+  border-radius:9999px;
+  color:#fff;
+  opacity:0.95;
+}
+.qr-search-line:hover{
+  transform:translateY(-3px);
+  box-shadow:0 18px 40px rgba(124,58,237,0.18);
+  background-position:100% 0;
+}
+
+/* tiny pulsing indicator */
+.qr-search-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:0 0 12px rgba(255,255,255,0.35);
+  animation:qrPulse 1.4s infinite;
+}
+
+
+
+/* Camera preview wrapper so overlay sits on top of video */
+.camera-preview-wrapper {
+  position: relative;
+  display: block;
+}
+
+/* Ensure qr-search-line (link) inside camera preview is docked to bottom center */
+.camera-preview-wrapper .qr-search-line {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-70%);
+  bottom: 712px;
+  z-index: 30;
+}
+
+/* Overlay variant of the existing qr-search-line for camera */
+.qr-search-line.camera-overlay {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 12px;
+  padding: 8px 14px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, rgba(6,182,212,0.95), rgba(124,58,237,0.95), rgba(239,68,68,0.95));
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  backdrop-filter: blur(6px);
+  opacity: 0.98;
+}
+
+/* Slightly smaller dot for camera overlay */
+.qr-search-line.camera-overlay .qr-search-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 12px rgba(255,255,255,0.35);
+  animation: qrPulse 1.4s infinite;
+}
+
+/* Tweak label/status sizes for overlay */
+.qr-search-line.camera-overlay .label { font-size: 13px; }
+.qr-search-line.camera-overlay .status { font-size: 12px; background: rgba(255,255,255,0.12); padding: 4px 8px; border-radius: 9999px; }
+
+/* Ensure responsive placement */
+@media (max-width: 640px) {
+  .qr-search-line.camera-overlay { bottom: 8px; padding: 6px 10px; font-size: 13px; }
 }

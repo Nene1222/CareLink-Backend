@@ -1,0 +1,171 @@
+.patient-form-wrapper,
+.patient-form-container {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  min-height: unset !important;
+  margin: 0 !important;
+}
+
+.form-header {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-bottom: 34px;
+}
+
+.avatar-icon {
+  width: 94px;
+  height: 94px;
+  background: linear-gradient(135deg, #7c88ff 0%, #5f6cff 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.avatar-icon svg {
+  width: 53px;
+  height: 53px;
+  color: white;
+}
+
+.header-text {
+  flex: 1;
+}
+.form-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #222;
+  margin: 0 0 4px 0;
+}
+.form-subtitle {
+  font-size: 20px;
+  color: #757575;
+  margin: 0;
+  font-weight: 600;
+}
+
+.form-content {
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px 4vw;
+}
+.form-row.three-cols {
+  grid-template-columns: 1fr 0.7fr 1fr;
+  gap: 22px 2vw;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.form-group.full-width {
+  width: 100%;
+}
+
+.form-label {
+  font-size: 1.35rem;
+  font-weight: bold;
+  color: #141414;
+  margin-bottom: 0px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 15px 18px;
+  font-size: 1.09rem;
+  border: none;
+  background: #f4f3f3;
+  font-weight: 500;
+  border-radius: 18px;
+  color: #181818;
+  margin-bottom: 3px;
+  transition: box-shadow 0.13s;
+  outline: none;
+  box-shadow: none;
+}
+.form-input:focus {
+  background-color: #eaeaea;
+  box-shadow: 0 0 0 1.5px #b5c8e7;
+}
+.form-input::placeholder {
+  color: #7e7e7e;
+  opacity: 0.7;
+}
+
+.input-with-icon {
+  position: relative;
+  width: 100%;
+}
+.form-input[type="date"]::-webkit-input-placeholder { color: #7e7e7e; }
+.form-input[type="date"] {
+  background: #f4f3f3;
+  min-height: 46px;
+  border-radius: 18px;
+}
+.form-input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  font-size: 20px;
+  opacity: 0.75;
+}
+
+.gender-options {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  padding-top: 4px;
+}
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  user-select: none;
+}
+.radio-option input[type="radio"] {
+  width: 19px;
+  height: 19px;
+  cursor: pointer;
+  accent-color: #8f8f8f;
+}
+.radio-label {
+  font-size: 1rem;
+  color: #54585d;
+  font-weight: 500;
+}
+
+@media (max-width: 968px) {
+  .form-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+  .avatar-icon {
+    width: 60px;
+    height: 60px;
+  }
+  .avatar-icon svg {
+    width: 32px;
+    height: 32px;
+  }
+  .form-title {
+    font-size: 1.3rem;
+  }
+  .form-subtitle {
+    font-size: 1.02rem;
+  }
+  .form-row, .form-row.three-cols {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

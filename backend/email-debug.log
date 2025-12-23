@@ -1,0 +1,752 @@
+{
+  "timestamp": "2025-12-22T16:43:37.563Z",
+  "email": "logtest@example.com",
+  "otp": "146062",
+  "config": {
+    "user": "ssopheakline@gmail.com",
+    "passLength": 12,
+    "hasPass": true
+  }
+}
+---
+{
+  "timestamp": "2025-12-22T16:43:42.228Z",
+  "email": "logtest@example.com",
+  "success": false,
+  "error": "Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials 98e67ed59e1d1-34ebeac8623sm2563670a91.1 - gsmtp"
+}
+===
+{
+  "timestamp": "2025-12-22T16:46:46.544Z",
+  "email": "ssopheakline@gmail.com",
+  "otp": "965668",
+  "config": {
+    "user": "ssopheakline@gmail.com",
+    "passLength": 12,
+    "hasPass": true
+  }
+}
+---
+{
+  "timestamp": "2025-12-22T16:46:51.601Z",
+  "email": "ssopheakline@gmail.com",
+  "success": false,
+  "error": "Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials 41be03b00d2f7-c1e7bd602desm10197380a12.21 - gsmtp"
+}
+===
+{
+  "timestamp": "2025-12-22T17:01:54.215Z",
+  "email": "ssopheakline@gmail.com",
+  "otp": "398577",
+  "config": {
+    "user": "ssopheakline@gmail.com",
+    "passLength": 12,
+    "hasPass": true
+  }
+}
+---
+{
+  "timestamp": "2025-12-22T17:01:58.175Z",
+  "email": "ssopheakline@gmail.com",
+  "success": false,
+  "error": "Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-2a2f3c66634sm104110355ad.12 - gsmtp"
+}
+===
+{
+  "timestamp": "2025-12-22T17:03:52.494Z",
+  "email": "ssopheakline@gmail.com",
+  "otp": "553497",
+  "config": {
+    "user": "ssopheakline@gmail.com",
+    "passLength": 12,
+    "hasPass": true
+  }
+}
+---
+{
+  "timestamp": "2025-12-22T17:03:57.043Z",
+  "email": "ssopheakline@gmail.com",
+  "success": false,
+  "error": "Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d2e1a72fcca58-7ff7e0a1a2asm10942725b3a.41 - gsmtp"
+}
+===
+{
+  "timestamp": "2025-12-22T17:17:10.080Z",
+  "email": "Sopheakline.sambo@student.cadt.edu.kh",
+  "otp": "660063",
+  "config": {
+    "user": "ssopheakline@gmail.com",
+    "passLength": 12,
+    "hasPass": true
+  }
+}
+---
+{
+  "timestamp": "2025-12-22T17:17:16.387Z",
+  "email": "Sopheakline.sambo@student.cadt.edu.kh",
+  "success": false,
+  "error": "Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials 98e67ed59e1d1-34e76de1c3csm6582896a91.2 - gsmtp"
+}
+===
+{
+  "timestamp": "2025-12-22T17:20:51.143Z",
+  "email": "Sopheakline.sambo@student.cadt.edu.kh",
+  "otp": "138650",
+  "config": {
+    "user": "ssopheakline@gmail.com",
+    "passLength": 12,
+    "hasPass": true
+  }
+}
+---
+{
+  "timestamp": "2025-12-22T17:20:55.459Z",
+  "email": "Sopheakline.sambo@student.cadt.edu.kh",
+  "success": false,
+  "error": "Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-2a2f3c66465sm104711355ad.15 - gsmtp"
+}
+===
+{
+  "timestamp": "2025-12-22T17:28:44.668Z",
+  "email": "test@clinic.com",
+  "otp": "219493",
+  "config": {
+    "user": "ssopheakline@gmail.com",
+    "passLength": 12,
+    "hasPass": true
+  }
+}
+---
+{
+  "timestamp": "2025-12-22T17:28:48.341Z",
+  "email": "test@clinic.com",
+  "success": false,
+  "error": "Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d2e1a72fcca58-7ff7eb87bfcsm11014838b3a.69 - gsmtp"
+}
+===
+{
+  "timestamp": "2025-12-22T17:29:37.145Z",
+  "email": "test@clinic.com",
+  "otp": "715356",
+  "config": {
+    "user": "clinicapp2024@outlook.com",
+    "passLength": 15,
+    "hasPass": true
+  }
+}
+---
+{
+  "timestamp": "2025-12-22T17:29:43.879Z",
+  "email": "test@clinic.com",
+  "success": false,
+  "error": "Invalid login: 535 5.7.139 Authentication unsuccessful, basic authentication is disabled. [SGBP274CA0019.SGPP274.PROD.OUTLOOK.COM 2025-12-22T17:29:43.572Z 08DE40D7B183FFAB]"
+}
+===
+{
+  "timestamp": "2025-12-22T17:32:17.827Z",
+  "email": "test@cadt.edu.kh",
+  "otp": "593067",
+  "config": {
+    "user": "Sopheakline.sambo@student.cadt.edu.kh",
+    "passLength": 4,
+    "hasPass": true
+  }
+}
+---
+{
+  "timestamp": "2025-12-22T17:32:21.231Z",
+  "email": "test@cadt.edu.kh",
+  "success": false,
+  "error": "Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-2a2f3d5d663sm103157385ad.77 - gsmtp"
+}
+===
+{
+  "timestamp": "2025-12-22T17:36:58.492Z",
+  "email": "test@clinic.com",
+  "otp": "426232",
+  "config": {
+    "user": "ssopheakline@gmail.com",
+    "passLength": 16,
+    "hasPass": true
+  }
+}
+---
+{
+  "timestamp": "2025-12-22T17:37:03.854Z",
+  "email": "test@clinic.com",
+  "success": false,
+  "error": "Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials 41be03b00d2f7-c1e7961c130sm9729599a12.3 - gsmtp"
+}
+===
+{
+  "timestamp": "2025-12-22T17:38:58.233Z",
+  "email": "final-test@clinic.com",
+  "otp": "157608",
+  "config": {
+    "user": "ssopheakline@gmail.com",
+    "passLength": 16,
+    "hasPass": true
+  }
+}
+---
+{
+  "timestamp": "2025-12-22T17:39:04.228Z",
+  "email": "final-test@clinic.com",
+  "success": true,
+  "error": null,
+  "info": {
+    "accepted": [
+      "final-test@clinic.com"
+    ],
+    "rejected": [],
+    "ehlo": [
+      "SIZE 35882577",
+      "8BITMIME",
+      "AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH",
+      "ENHANCEDSTATUSCODES",
+      "PIPELINING",
+      "CHUNKING",
+      "SMTPUTF8"
+    ],
+    "envelopeTime": 639,
+    "messageTime": 756,
+    "messageSize": 310,
+    "response": "250 2.0.0 OK  1766425143 d9443c01a7336-2a2f3c66932sm104889965ad.11 - gsmtp",
+    "envelope": {
+      "from": "ssopheakline@gmail.com",
+      "to": [
+        "final-test@clinic.com"
+      ]
+    },
+    "messageId": "<4d0156f5-976a-0ce5-63db-0b4130ddaef8@gmail.com>"
+  }
+}
+===
+{
+  "timestamp": "2025-12-22T17:40:29.394Z",
+  "email": "ssopheakline@gmail.com",
+  "otp": "290040",
+  "config": {
+    "user": "ssopheakline@gmail.com",
+    "passLength": 16,
+    "hasPass": true
+  }
+}
+---
+{
+  "timestamp": "2025-12-22T17:40:35.071Z",
+  "email": "ssopheakline@gmail.com",
+  "success": true,
+  "error": null,
+  "info": {
+    "accepted": [
+      "ssopheakline@gmail.com"
+    ],
+    "rejected": [],
+    "ehlo": [
+      "SIZE 35882577",
+      "8BITMIME",
+      "AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH",
+      "ENHANCEDSTATUSCODES",
+      "PIPELINING",
+      "CHUNKING",
+      "SMTPUTF8"
+    ],
+    "envelopeTime": 650,
+    "messageTime": 687,
+    "messageSize": 311,
+    "response": "250 2.0.0 OK  1766425234 d9443c01a7336-2a2f3c82a9asm104399735ad.30 - gsmtp",
+    "envelope": {
+      "from": "ssopheakline@gmail.com",
+      "to": [
+        "ssopheakline@gmail.com"
+      ]
+    },
+    "messageId": "<719c598d-d7c2-5cce-48c1-bbee696a6b29@gmail.com>"
+  }
+}
+===
+{
+  "timestamp": "2025-12-22T17:44:18.208Z",
+  "email": "your-email@test.com",
+  "otp": "660140",
+  "config": {
+    "user": "ssopheakline@gmail.com",
+    "passLength": 16,
+    "hasPass": true
+  }
+}
+---
+{
+  "timestamp": "2025-12-22T17:44:25.538Z",
+  "email": "your-email@test.com",
+  "success": true,
+  "error": null,
+  "info": {
+    "accepted": [
+      "your-email@test.com"
+    ],
+    "rejected": [],
+    "ehlo": [
+      "SIZE 35882577",
+      "8BITMIME",
+      "AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH",
+      "ENHANCEDSTATUSCODES",
+      "PIPELINING",
+      "CHUNKING",
+      "SMTPUTF8"
+    ],
+    "envelopeTime": 641,
+    "messageTime": 813,
+    "messageSize": 308,
+    "response": "250 2.0.0 OK  1766425465 d2e1a72fcca58-7ff7e792b65sm11198686b3a.58 - gsmtp",
+    "envelope": {
+      "from": "ssopheakline@gmail.com",
+      "to": [
+        "your-email@test.com"
+      ]
+    },
+    "messageId": "<5598082e-9c48-0579-2bf4-6d6cbd163f72@gmail.com>"
+  }
+}
+===
+{
+  "timestamp": "2025-12-22T17:44:51.459Z",
+  "email": "ssopheakline@gmail.com",
+  "otp": "535198",
+  "config": {
+    "user": "ssopheakline@gmail.com",
+    "passLength": 16,
+    "hasPass": true
+  }
+}
+---
+{
+  "timestamp": "2025-12-22T17:44:57.950Z",
+  "email": "ssopheakline@gmail.com",
+  "success": true,
+  "error": null,
+  "info": {
+    "accepted": [
+      "ssopheakline@gmail.com"
+    ],
+    "rejected": [],
+    "ehlo": [
+      "SIZE 35882577",
+      "8BITMIME",
+      "AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH",
+      "ENHANCEDSTATUSCODES",
+      "PIPELINING",
+      "CHUNKING",
+      "SMTPUTF8"
+    ],
+    "envelopeTime": 653,
+    "messageTime": 711,
+    "messageSize": 311,
+    "response": "250 2.0.0 OK  1766425497 d9443c01a7336-2a2f3c839b7sm104484325ad.37 - gsmtp",
+    "envelope": {
+      "from": "ssopheakline@gmail.com",
+      "to": [
+        "ssopheakline@gmail.com"
+      ]
+    },
+    "messageId": "<70649cb0-bc09-5253-b300-18a077768fde@gmail.com>"
+  }
+}
+===
+{
+  "timestamp": "2025-12-22T17:47:36.822Z",
+  "email": "ssopheakline@gmail.com",
+  "otp": "856306",
+  "config": {
+    "user": "ssopheakline@gmail.com",
+    "passLength": 16,
+    "hasPass": true
+  }
+}
+---
+{
+  "timestamp": "2025-12-22T17:47:42.013Z",
+  "email": "ssopheakline@gmail.com",
+  "success": true,
+  "error": null,
+  "info": {
+    "accepted": [
+      "ssopheakline@gmail.com"
+    ],
+    "rejected": [],
+    "ehlo": [
+      "SIZE 35882577",
+      "8BITMIME",
+      "AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH",
+      "ENHANCEDSTATUSCODES",
+      "PIPELINING",
+      "CHUNKING",
+      "SMTPUTF8"
+    ],
+    "envelopeTime": 698,
+    "messageTime": 701,
+    "messageSize": 311,
+    "response": "250 2.0.0 OK  1766425661 d9443c01a7336-2a2f3c666casm102554655ad.3 - gsmtp",
+    "envelope": {
+      "from": "ssopheakline@gmail.com",
+      "to": [
+        "ssopheakline@gmail.com"
+      ]
+    },
+    "messageId": "<f9993cc2-5d56-eaec-7ad9-410dd050c420@gmail.com>"
+  }
+}
+===
+{
+  "timestamp": "2025-12-22T17:50:04.417Z",
+  "email": "ssopheakline@gmail.com",
+  "otp": "328336",
+  "config": {
+    "user": "ssopheakline@gmail.com",
+    "passLength": 16,
+    "hasPass": true
+  }
+}
+---
+{
+  "timestamp": "2025-12-22T17:50:11.902Z",
+  "email": "ssopheakline@gmail.com",
+  "success": true,
+  "error": null,
+  "info": {
+    "accepted": [
+      "ssopheakline@gmail.com"
+    ],
+    "rejected": [],
+    "ehlo": [
+      "SIZE 35882577",
+      "8BITMIME",
+      "AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH",
+      "ENHANCEDSTATUSCODES",
+      "PIPELINING",
+      "CHUNKING",
+      "SMTPUTF8"
+    ],
+    "envelopeTime": 654,
+    "messageTime": 796,
+    "messageSize": 311,
+    "response": "250 2.0.0 OK  1766425811 98e67ed59e1d1-34e70dcc7c8sm13568359a91.15 - gsmtp",
+    "envelope": {
+      "from": "ssopheakline@gmail.com",
+      "to": [
+        "ssopheakline@gmail.com"
+      ]
+    },
+    "messageId": "<ce50579a-25d1-0c54-c393-b178e7acae91@gmail.com>"
+  }
+}
+===
+{
+  "timestamp": "2025-12-22T17:52:19.244Z",
+  "email": "ssopheakline@gmail.com",
+  "otp": "885092",
+  "config": {
+    "user": "ssopheakline@gmail.com",
+    "passLength": 16,
+    "hasPass": true
+  }
+}
+---
+{
+  "timestamp": "2025-12-22T17:52:25.107Z",
+  "email": "ssopheakline@gmail.com",
+  "success": true,
+  "error": null,
+  "info": {
+    "accepted": [
+      "ssopheakline@gmail.com"
+    ],
+    "rejected": [],
+    "ehlo": [
+      "SIZE 35882577",
+      "8BITMIME",
+      "AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH",
+      "ENHANCEDSTATUSCODES",
+      "PIPELINING",
+      "CHUNKING",
+      "SMTPUTF8"
+    ],
+    "envelopeTime": 632,
+    "messageTime": 736,
+    "messageSize": 311,
+    "response": "250 2.0.0 OK  1766425944 98e67ed59e1d1-34e70d676b8sm13453177a91.8 - gsmtp",
+    "envelope": {
+      "from": "ssopheakline@gmail.com",
+      "to": [
+        "ssopheakline@gmail.com"
+      ]
+    },
+    "messageId": "<46bed4f4-227e-3cc4-466c-79cc95277c61@gmail.com>"
+  }
+}
+===
+{
+  "timestamp": "2025-12-23T04:12:36.896Z",
+  "email": "test@example.com",
+  "otp": "254155",
+  "config": {
+    "user": "ssopheakline@gmail.com",
+    "passLength": 16,
+    "hasPass": true
+  }
+}
+---
+{
+  "timestamp": "2025-12-23T04:12:39.760Z",
+  "email": "test@example.com",
+  "success": true,
+  "error": null,
+  "info": {
+    "accepted": [
+      "test@example.com"
+    ],
+    "rejected": [],
+    "ehlo": [
+      "SIZE 35882577",
+      "8BITMIME",
+      "AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH",
+      "ENHANCEDSTATUSCODES",
+      "PIPELINING",
+      "CHUNKING",
+      "SMTPUTF8"
+    ],
+    "envelopeTime": 752,
+    "messageTime": 820,
+    "messageSize": 305,
+    "response": "250 2.0.0 OK  1766463159 d9443c01a7336-2a2f3d6ec6bsm110077695ad.87 - gsmtp",
+    "envelope": {
+      "from": "ssopheakline@gmail.com",
+      "to": [
+        "test@example.com"
+      ]
+    },
+    "messageId": "<4303e142-0506-3754-7a1e-78e3f1fa10c0@gmail.com>"
+  }
+}
+===
+{
+  "timestamp": "2025-12-23T04:13:11.749Z",
+  "email": "newtest@example.com",
+  "otp": "644352",
+  "config": {
+    "user": "ssopheakline@gmail.com",
+    "passLength": 16,
+    "hasPass": true
+  }
+}
+---
+{
+  "timestamp": "2025-12-23T04:13:14.497Z",
+  "email": "newtest@example.com",
+  "success": true,
+  "error": null,
+  "info": {
+    "accepted": [
+      "newtest@example.com"
+    ],
+    "rejected": [],
+    "ehlo": [
+      "SIZE 35882577",
+      "8BITMIME",
+      "AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH",
+      "ENHANCEDSTATUSCODES",
+      "PIPELINING",
+      "CHUNKING",
+      "SMTPUTF8"
+    ],
+    "envelopeTime": 689,
+    "messageTime": 865,
+    "messageSize": 308,
+    "response": "250 2.0.0 OK  1766463194 41be03b00d2f7-c1e79a17fdesm10605591a12.8 - gsmtp",
+    "envelope": {
+      "from": "ssopheakline@gmail.com",
+      "to": [
+        "newtest@example.com"
+      ]
+    },
+    "messageId": "<8bc1b14c-4439-b9a9-8c35-ffa7c9b40cf4@gmail.com>"
+  }
+}
+===
+{
+  "timestamp": "2025-12-23T04:13:21.752Z",
+  "email": "unique-test-123@example.com",
+  "otp": "885138",
+  "config": {
+    "user": "ssopheakline@gmail.com",
+    "passLength": 16,
+    "hasPass": true
+  }
+}
+---
+{
+  "timestamp": "2025-12-23T04:13:24.773Z",
+  "email": "unique-test-123@example.com",
+  "success": true,
+  "error": null,
+  "info": {
+    "accepted": [
+      "unique-test-123@example.com"
+    ],
+    "rejected": [],
+    "ehlo": [
+      "SIZE 35882577",
+      "8BITMIME",
+      "AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH",
+      "ENHANCEDSTATUSCODES",
+      "PIPELINING",
+      "CHUNKING",
+      "SMTPUTF8"
+    ],
+    "envelopeTime": 869,
+    "messageTime": 1238,
+    "messageSize": 316,
+    "response": "250 2.0.0 OK  1766463204 d9443c01a7336-2a2f3da7dabsm110906035ad.25 - gsmtp",
+    "envelope": {
+      "from": "ssopheakline@gmail.com",
+      "to": [
+        "unique-test-123@example.com"
+      ]
+    },
+    "messageId": "<0922ad6e-7695-4754-656b-e805596ce088@gmail.com>"
+  }
+}
+===
+{
+  "timestamp": "2025-12-23T04:15:23.306Z",
+  "email": "ssopheakline@gmail.com",
+  "otp": "436530",
+  "config": {
+    "user": "ssopheakline@gmail.com",
+    "passLength": 16,
+    "hasPass": true
+  }
+}
+---
+{
+  "timestamp": "2025-12-23T04:15:26.512Z",
+  "email": "ssopheakline@gmail.com",
+  "success": true,
+  "error": null,
+  "info": {
+    "accepted": [
+      "ssopheakline@gmail.com"
+    ],
+    "rejected": [],
+    "ehlo": [
+      "SIZE 35882577",
+      "8BITMIME",
+      "AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH",
+      "ENHANCEDSTATUSCODES",
+      "PIPELINING",
+      "CHUNKING",
+      "SMTPUTF8"
+    ],
+    "envelopeTime": 980,
+    "messageTime": 800,
+    "messageSize": 311,
+    "response": "250 2.0.0 OK  1766463326 98e67ed59e1d1-34e70d4f7ffsm14382268a91.1 - gsmtp",
+    "envelope": {
+      "from": "ssopheakline@gmail.com",
+      "to": [
+        "ssopheakline@gmail.com"
+      ]
+    },
+    "messageId": "<e0f98815-0036-bb21-1467-ecb0ac429ccd@gmail.com>"
+  }
+}
+===
+{
+  "timestamp": "2025-12-23T04:52:21.411Z",
+  "email": "ssopheakline@gmail.com",
+  "otp": "350214",
+  "config": {
+    "user": "ssopheakline@gmail.com",
+    "passLength": 16,
+    "hasPass": true
+  }
+}
+---
+{
+  "timestamp": "2025-12-23T04:52:24.136Z",
+  "email": "ssopheakline@gmail.com",
+  "success": true,
+  "error": null,
+  "info": {
+    "accepted": [
+      "ssopheakline@gmail.com"
+    ],
+    "rejected": [],
+    "ehlo": [
+      "SIZE 35882577",
+      "8BITMIME",
+      "AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH",
+      "ENHANCEDSTATUSCODES",
+      "PIPELINING",
+      "CHUNKING",
+      "SMTPUTF8"
+    ],
+    "envelopeTime": 870,
+    "messageTime": 764,
+    "messageSize": 311,
+    "response": "250 2.0.0 OK  1766465543 d2e1a72fcca58-7ff7aa328basm12154735b3a.11 - gsmtp",
+    "envelope": {
+      "from": "ssopheakline@gmail.com",
+      "to": [
+        "ssopheakline@gmail.com"
+      ]
+    },
+    "messageId": "<e77e9cfb-edfa-66fc-8ba2-ce784de5e973@gmail.com>"
+  }
+}
+===
+{
+  "timestamp": "2025-12-23T14:53:46.432Z",
+  "email": "ssopheakline@gmail.com",
+  "otp": "448146",
+  "config": {
+    "user": "ssopheakline@gmail.com",
+    "passLength": 16,
+    "hasPass": true
+  }
+}
+---
+{
+  "timestamp": "2025-12-23T14:53:56.731Z",
+  "email": "ssopheakline@gmail.com",
+  "success": true,
+  "error": null,
+  "info": {
+    "accepted": [
+      "ssopheakline@gmail.com"
+    ],
+    "rejected": [],
+    "ehlo": [
+      "SIZE 35882577",
+      "8BITMIME",
+      "AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH",
+      "ENHANCEDSTATUSCODES",
+      "PIPELINING",
+      "CHUNKING",
+      "SMTPUTF8"
+    ],
+    "envelopeTime": 2734,
+    "messageTime": 1248,
+    "messageSize": 311,
+    "response": "250 2.0.0 OK  1766501637 d9443c01a7336-2a2f3d5f5dasm128056995ad.82 - gsmtp",
+    "envelope": {
+      "from": "ssopheakline@gmail.com",
+      "to": [
+        "ssopheakline@gmail.com"
+      ]
+    },
+    "messageId": "<063b296b-b4d9-e0a6-8fe2-2330991273e4@gmail.com>"
+  }
+}
+===

@@ -1,0 +1,26 @@
+.medicine-status {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    white-space: nowrap;
+  }
+  
+  .medicine-status-available {
+    background-color: #dbeafe;
+    color: #1e40af;
+  }
+  
+  .medicine-status-low-stock {
+    background-color: #fef3c7;
+    color: #d97706;
+  }
+  
+  .medicine-status-out-of-stock {
+    background-color: #fee2e2;
+    color: #dc2626;
+  }
+  
+  

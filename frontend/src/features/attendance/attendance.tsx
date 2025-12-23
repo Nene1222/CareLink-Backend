@@ -49,6 +49,7 @@ const initialAttendance: Attendance[] = [
     checkOutTime: undefined,
     date: new Date().toISOString().split("T")[0],
     status: "present",
+    approval: "pending",
   },
   {
     id: "2",
@@ -63,6 +64,7 @@ const initialAttendance: Attendance[] = [
     checkOutTime: undefined,
     date: new Date().toISOString().split("T")[0],
     status: "late",
+    approval: "pending",
   },
   {
     id: "3",
@@ -77,6 +79,7 @@ const initialAttendance: Attendance[] = [
     checkOutTime: "05:30 PM",
     date: new Date().toISOString().split("T")[0],
     status: "present",
+    approval: "accepted",
   },
 ]
 
@@ -568,6 +571,10 @@ export default function AttendancePage() {
         }
         const created = await createAttendanceAPI(newRecordPayload)
         setAttendance((prev) => [created, ...prev])
+        // after successful create, ensure UI shows attendance tab
+        setActiveTab('attendance')
+        // optional: ensure selected date is today so the new record is visible
+        setSelectedDate(new Date().toISOString().split('T')[0])
       }
       setManualData({ profile: '👤', name: '', staffId: '', role: '', organization: '', room: '', shift: '' })
       setScannedOrgData(null)
@@ -606,21 +613,38 @@ export default function AttendancePage() {
   }
 
   const handleUpdateApproval = async (id: string, newStatus: "pending" | "accepted" | "rejected") => {
-  try {
-    // SAVE TO BACKEND
-    await updateAttendanceAPI(id, { approval: newStatus })
+    try {
+      // Try to save to backend - but don't fail if record doesn't exist (for demo data)
+      const res = await fetch(`${API_BASE}/api/attendance/${id}/approval`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ approval: newStatus }),
+      })
 
-    // UPDATE UI STATE
-    setAttendance((prev) =>
-      prev.map((a) =>
-        a.id === id ? { ...a, approval: newStatus } : a
+      // If the API call fails (e.g., record doesn't exist in DB), still update UI
+      if (!res.ok) {
+        console.warn(`Record ${id} not found in database, updating local state only`)
+      }
+
+      // Always update UI state (whether API call succeeded or failed)
+      setAttendance((prev) =>
+        prev.map((a) =>
+          a.id === id ? { ...a, approval: newStatus } : a
+        )
       )
-    )
-  } catch (err) {
-    console.error("Approval update failed", err)
-    alert("Failed to update approval status")
+
+      console.log(`Approval status updated to ${newStatus} for record ${id}`)
+    } catch (err) {
+      console.error("Approval update failed", err)
+      // Still update UI state even if API fails
+      setAttendance((prev) =>
+        prev.map((a) =>
+          a.id === id ? { ...a, approval: newStatus } : a
+        )
+      )
+      console.log(`Updated local state only - API call failed for record ${id}`)
+    }
   }
-}
 
 const handleAskPermission = async (id: string) => {
   try {
@@ -1064,25 +1088,6 @@ const handleAskPermission = async (id: string) => {
             <Edit style={{ height: '16px', width: '16px' }} />
           </button>
 
-          {/* Ask Permission Button */}
-          <button
-            onClick={() => handleAskPermission(record.id)}
-            style={{
-              padding: '8px',
-              color: record.approval === 'pending' ? '#f59e0b' : '#9ca3af',
-              borderRadius: '6px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              transition: 'all 0.2s',
-              backgroundColor: record.approval === 'pending' ? '#fef3c7' : 'transparent'
-            }}
-            className="hover:text-orange-600 hover:bg-orange-50"
-            title="Ask Permission"
-          >
-            <Send style={{ height: '16px', width: '16px' }} />
-          </button>
-
           {!record.checkOutTime && (
             <button
               onClick={() => handleCheckOut(record.id)}
@@ -1329,11 +1334,32 @@ const handleAskPermission = async (id: string) => {
             {cameraActive && (
               <div className="mb-4">
                 <p className="text-xs text-gray-600 text-center mb-2">Point camera at QR code</p>
-                <video
-                  ref={videoRef}
-                  className="w-full rounded-lg bg-black"
-                  style={{ maxHeight: '300px' }}
-                />
+
+                <div className="camera-preview-wrapper">
+                  <video
+                    ref={videoRef}
+                    className="w-full rounded-lg bg-black"
+                    style={{ maxHeight: '300px' }}
+                  />
+
+                  {/* QR alignment frame */}
+                  <div className="qr-frame" aria-hidden="true">
+                    <span className="corner top-left" aria-hidden="true" />
+                    <span className="corner top-right" aria-hidden="true" />
+                    <span className="corner bottom-left" aria-hidden="true" />
+                    <span className="corner bottom-right" aria-hidden="true" />
+                  </div>
+
+                  {/* Animated scanning line */}
+                  <div className="scan-line" aria-hidden="true" />
+
+                  {/* Scanning overlay line */}
+                  {/* <div className="qr-search-line camera-overlay" role="status" aria-live="polite">
+                    <span className="qr-search-dot" aria-hidden="true" />
+                    <span className="label">Scanning for QR on camera</span>
+                    <span className="status">Searching…</span>
+                  </div> */}
+                </div>
               </div>
             )}
 
@@ -1496,10 +1522,12 @@ const handleAskPermission = async (id: string) => {
                 <select
                   value={manualData.organization}
                   onChange={(e) => setManualData({ ...manualData, organization: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                  className={`w-full px-3 py-2 border border-gray-300 rounded-lg ${scannedOrgData?.isScanned ? 'bg-gray-100 cursor-not-allowed' : ''}`}
+                  disabled={!!scannedOrgData?.isScanned}
+                  title={scannedOrgData?.isScanned ? 'Organization locked from QR scan' : 'Select organization'}
                 >
-                  <option value="">Select organization</option>
-                  {organizations.map((org) => (
+                  <option value="">{scannedOrgData?.isScanned ? scannedOrgData.orgName : 'Select organization'}</option>
+                  {!scannedOrgData?.isScanned && organizations.map((org) => (
                     <option key={org.id} value={org.name}>
                       {org.name}
                     </option>

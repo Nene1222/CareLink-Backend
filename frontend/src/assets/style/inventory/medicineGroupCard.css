@@ -1,0 +1,166 @@
+.medicine-group-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: all 0.2s ease;
+  }
+  
+  .medicine-group-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+  }
+  
+  /* Card Header */
+  .card-header {
+    margin-bottom: 4px;
+  }
+  
+  .card-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+    letter-spacing: -0.3px;
+  }
+  
+  /* Card Summary */
+  .card-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .summary-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .summary-label {
+    font-size: 15px;
+    color: #666;
+    font-weight: 500;
+  }
+  
+  .summary-value {
+    font-size: 15px;
+    color: #000;
+    font-weight: 600;
+  }
+  
+  /* Card Medicines */
+  .card-medicines {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+  }
+  
+  .medicines-label {
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 4px;
+  }
+  
+  .medicines-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .medicine-item {
+    font-size: 15px;
+    color: #333;
+    font-weight: 400;
+    padding-left: 4px;
+  }
+  
+  .medicine-item.more-text {
+    color: #666;
+    font-style: italic;
+    cursor: pointer;
+  }
+  
+  .medicine-item.more-text:hover {
+    color: #6366f1;
+  }
+  
+  /* Card Actions */
+  .card-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid #f0f0f0;
+  }
+  
+  .action-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .action-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .edit-btn {
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    color: white;
+    box-shadow: 0 2px 6px rgba(99, 102, 241, 0.3);
+  }
+  
+  .edit-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(99, 102, 241, 0.4);
+  }
+  
+  .delete-btn {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+    box-shadow: 0 2px 6px rgba(239, 68, 68, 0.3);
+  }
+  
+  .delete-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(239, 68, 68, 0.4);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 576px) {
+    .medicine-group-card {
+      padding: 20px;
+    }
+  
+    .card-title {
+      font-size: 20px;
+    }
+  
+    .card-actions {
+      flex-direction: column;
+    }
+  
+    .action-btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+  
+  

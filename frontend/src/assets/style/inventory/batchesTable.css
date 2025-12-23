@@ -1,0 +1,174 @@
+.batches-table-wrapper {
+    margin-top: 16px;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  .batches-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .batches-table thead {
+    background-color: #f8fafc;
+  }
+  
+  .batches-table th {
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 700;
+    color: #1e293b;
+    border-bottom: 2px solid #e2e8f0;
+  }
+  
+  .batches-table tbody tr {
+    border-bottom: 1px solid #f1f5f9;
+    transition: background-color 0.2s ease;
+  }
+  
+  .batches-table tbody tr:hover {
+    background-color: #f8fafc;
+  }
+  
+  .batches-table tbody tr.even-row {
+    background-color: white;
+  }
+  
+  .batches-table tbody tr.odd-row {
+    background-color: #f8fafc;
+  }
+  
+  .batches-table td {
+    padding: 12px 16px;
+    font-size: 14px;
+    color: #334155;
+  }
+  
+  .batch-no {
+    font-weight: 600;
+    color: #1e293b;
+  }
+  
+  .expiry-date,
+  .purchase-date {
+    color: #475569;
+  }
+  
+  .qty,
+  .remaining {
+    font-weight: 600;
+    color: #475569;
+  }
+  
+  .detail-cell {
+    text-align: right;
+  }
+  
+  .detail-link {
+    background: none;
+    border: none;
+    color: #6366f1;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s ease;
+  }
+  
+  .detail-link:hover {
+    color: #4f46e5;
+    text-decoration: underline;
+  }
+  
+  /* Expiration Status Styles */
+  .expiry-status {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .status-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  
+  .status-expired .status-badge {
+    background-color: #fee2e2;
+    color: #dc2626;
+  }
+  
+  .status-expiring-soon .status-badge {
+    background-color: #fef3c7;
+    color: #d97706;
+  }
+  
+  .status-ok .status-badge {
+    background-color: #d1fae5;
+    color: #059669;
+  }
+  
+  .status-message {
+    font-size: 11px;
+    color: #64748b;
+    font-style: italic;
+  }
+  
+  .status-expired {
+    background-color: #fee2e2 !important;
+    border-left: 4px solid #dc2626;
+  }
+  
+  .status-expired td {
+    color: #991b1b !important;
+  }
+  
+  .status-expired .batch-no,
+  .status-expired .expiry-date,
+  .status-expired .qty,
+  .status-expired .remaining,
+  .status-expired .purchase-date {
+    color: #991b1b !important;
+    font-weight: 600;
+  }
+  
+  .status-expiring-soon {
+    background-color: #fffbeb;
+  }
+  
+  .status-expiring-soon:hover {
+    background-color: #fef3c7;
+  }
+  
+  .status-expired:hover {
+    background-color: #fecaca !important;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .batches-table-wrapper {
+      overflow-x: auto;
+    }
+  
+    .batches-table {
+      min-width: 600px;
+    }
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

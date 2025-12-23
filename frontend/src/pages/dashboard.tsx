@@ -262,14 +262,6 @@ const AttendanceTrends = () => (
           <span className="badge-icon">⏳</span>
           <span>1 Pending</span>
         </div>
-        <div className="status-badge approved">
-          <span className="badge-icon">✓</span>
-          <span>2 Approved</span>
-        </div>
-        <div className="status-badge rejected">
-          <span className="badge-icon">✕</span>
-          <span>1 Rejected</span>
-        </div>
       </div>
     </div>
     <div className="user-list">
@@ -280,13 +272,7 @@ const AttendanceTrends = () => (
           <span>1 pending</span>
         </div>
       </div>
-      <div className="user-item">
-        <span className="user-label">wadim.ngvatch</span>
-        <div className="status-badge approved">
-          <span className="badge-icon">✓</span>
-          <span>2 approved</span>
-        </div>
-      </div>
+
     </div>
   </div>
 );

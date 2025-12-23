@@ -1,0 +1,78 @@
+.medical-history-wrapper,.medical-history-container {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    min-height: unset !important;
+    margin: 0 !important;
+  }
+  .history-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 7px;
+  }
+  .header-icon {
+    width: 54px;
+    height: 54px;
+    background: #e5edfb;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .header-icon svg { width: 32px; height: 32px; color: #376ad1; }
+  .header-text { flex: 1; }
+  .history-title { font-size: 1.33rem; font-weight: 800; color: #222; margin: 0 0 2px 0; }
+  .history-subtitle { font-size: 15px; color: #757575; margin: 0; font-weight: 600; }
+  
+  .history-content { display: flex; flex-direction: column; gap: 19px; }
+  .section-label { font-size: 1.14rem; font-weight: bold; color: #181818; margin-bottom: 2px; }
+  .required { color: #222; font-weight: 700; }
+  .section-hint { font-size: .98rem; color: #6d6d6d; margin-bottom: 6px; margin-top: 0; }
+  
+  .form-section { gap: 0.3rem; margin-bottom:0; }
+  .form-textarea {
+    width: 100%;
+    padding: 15px 18px;
+    font-size: 1.12rem;
+    border: none;
+    background: #f4f3f3;
+    font-weight: 500;
+    border-radius: 16px;
+    color: #181818;
+    margin-bottom: 3px;
+    transition: box-shadow 0.13s;
+    outline: none;
+    box-shadow: none;
+    min-height: 45px;
+  }
+  .form-textarea:focus { background: #ececec; box-shadow: 0 0 0 1.5px #b5c8e7; }
+  .form-textarea.small { min-height: 44px; }
+  .form-textarea.large { min-height: 82px; }
+  
+  .radio-group { display: flex; gap: 32px; margin-bottom: 3px; flex-wrap: wrap; }
+  .radio-option-inline {
+    display: flex; align-items: center; gap: 7px; cursor: pointer; user-select: none;
+  }
+  .radio-option-inline input[type="radio"] { width: 18px; height: 18px; cursor: pointer; accent-color: #959595; }
+  .radio-label-inline {
+    font-size: 1rem; color: #54585d; font-weight: 500;
+  }
+  
+  .checkbox-group { display: flex; gap: 28px; margin-bottom: 4px; flex-wrap: wrap; }
+  .checkbox-option { display: flex; align-items: center; gap: 7px; cursor: pointer; user-select: none; }
+  .checkbox-option input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; accent-color: #959595; }
+  .checkbox-label { font-size: 1rem; color: #54585d; font-weight: 500; }
+  
+  .form-row-two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  
+  @media (max-width: 968px) {
+    .history-header { flex-direction: column; text-align: center; gap: 8px; }
+    .header-icon { width: 34px; height: 34px; }
+    .header-icon svg { width: 18px; height: 18px; }
+    .history-title { font-size: 1rem; }
+    .form-row-two { grid-template-columns: 1fr; gap: 7px; }
+    .checkbox-group { flex-direction: column; gap: 7px; }
+  }

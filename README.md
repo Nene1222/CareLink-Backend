@@ -99,6 +99,10 @@ cd "C:\Year 4\cap2-project\backend"
 npm install mongoose dotenv
 npm install -D @types/mongoose
 npm install @inertiajs/react
+cd backend and frontend too
+>> npm install pusher
+npm install pusher-js
+npm install -D @types/pusher-js
 
 
 
@@ -120,3 +124,7 @@ npm run dev
 
 cd "C:\Year 4\cap2-project\frontend"
 npm install jspdf html2canvas
+
+netstat -ano | findstr :3000
+Start-Sleep -Seconds 4; netstat -ano | findstr :3000
+cd "c:/Year 4/cap2-project/backend"; type .env

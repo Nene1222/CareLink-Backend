@@ -1,0 +1,56 @@
+[
+  {
+    "_id": "svc_001",
+    "name": "General Consultation",
+    "durationMinutes": 30,
+    "price": 10,
+    "roomNumber": "R101",
+    "patientId": "PT12345",
+    "patientName": "John Doe"
+  },
+  {
+    "_id": "svc_002",
+    "name": "Ultrasound",
+    "durationMinutes": 310,
+    "price": 50,
+    "roomNumber": "R202",
+    "patientId": null,
+    "patientName": null
+  },
+  {
+    "_id": "svc_003",
+    "name": "X-Ray",
+    "durationMinutes": 45,
+    "price": 35,
+    "roomNumber": "R203",
+    "patientId": null,
+    "patientName": null
+  },
+  {
+    "_id": "svc_004",
+    "name": "Blood Test",
+    "durationMinutes": 20,
+    "price": 15,
+    "roomNumber": "R104",
+    "patientId": "PT67890",
+    "patientName": "Jane Smith"
+  },
+  {
+    "_id": "svc_005",
+    "name": "Patient Care Room",
+    "durationMinutes": 480,
+    "price": 100,
+    "roomNumber": "R301",
+    "patientId": null,
+    "patientName": null
+  },
+  {
+    "_id": "svc_006",
+    "name": "Dental Checkup",
+    "durationMinutes": 60,
+    "price": 25,
+    "roomNumber": "R105",
+    "patientId": null,
+    "patientName": null
+  }
+]

@@ -1,0 +1,125 @@
+/* Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Modal Card */
+  .modal-card {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 16px;
+    padding: 40px;
+    max-width: 500px;
+    width: 90%;
+    z-index: 1001;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    border: 1px solid #e0e0e0;
+  }
+  
+  /* Title */
+  .modal-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #000;
+  margin: 0 0 12px 0;
+    letter-spacing: -0.3px;
+  }
+
+.modal-description {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+  
+  /* Form */
+  .modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .form-label {
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+  }
+
+.required-indicator {
+  color: #ef4444;
+  margin-left: 4px;
+}
+  
+  .form-input {
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 16px;
+    border: none;
+    background-color: #f4f3f3;
+    border-radius: 8px;
+    color: #333;
+    outline: none;
+    transition: background-color 0.2s ease;
+    font-weight: 400;
+  }
+  
+  .form-input:focus {
+    background-color: #ececec;
+  }
+  
+  .form-input::placeholder {
+    color: #999;
+  }
+  
+  /* Form Actions */
+  .form-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 8px;
+  }
+  
+/* Buttons use shared .btn-cancel / .btn-save styles from addNewMedicineModal.css */
+  
+  /* Responsive Design */
+  @media (max-width: 576px) {
+    .modal-card {
+      padding: 32px 24px;
+      width: 95%;
+    }
+  
+    .modal-title {
+      font-size: 24px;
+      margin-bottom: 24px;
+    }
+  
+    .form-actions {
+      flex-direction: column-reverse;
+    }
+  
+    .btn-cancel,
+    .btn-save {
+      width: 100%;
+    }
+  }
+  
+  
