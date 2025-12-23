@@ -6,7 +6,7 @@ export interface IMedicalRecord extends Document {
   // Patient Information
   patient: {
     name: string
-    id: string
+    id?: string  // Made optional for now
     gender: 'Female' | 'Male' | 'Other'
     dateOfBirth: Date
     age: number
@@ -17,7 +17,8 @@ export interface IMedicalRecord extends Document {
   // Visit Information
   visit: {
     dateOfVisit: Date
-    doctor: string
+    doctor: string  // Kept for backward compatibility
+    doctorId?: Types.ObjectId  // NEW: Reference to Attendance/Doctor
     reasonOfVisit?: string
   }
   
@@ -89,7 +90,7 @@ const MedicalRecordSchema = new Schema<IMedicalRecord>(
     // Patient Information
     patient: {
       name: { type: String, required: true, trim: true, maxlength: 200 },
-      id: { type: String, required: true, trim: true, maxlength: 50, index: true },
+      id: { type: String, required: false, trim: true, maxlength: 50, index: true },  // Made optional
       gender: { type: String, required: true, enum: ['Female', 'Male', 'Other'] },
       dateOfBirth: { type: Date, required: true },
       age: { type: Number, required: true, min: 0, max: 150 },
@@ -100,7 +101,8 @@ const MedicalRecordSchema = new Schema<IMedicalRecord>(
     // Visit Information
     visit: {
       dateOfVisit: { type: Date, required: true, index: true },
-      doctor: { type: String, required: true, trim: true, maxlength: 200, index: true },
+      doctor: { type: String, required: true, trim: true, maxlength: 200, index: true },  // Kept for backward compatibility
+      doctorId: { type: Schema.Types.ObjectId, ref: 'Attendance', required: false },  // NEW: Optional reference
       reasonOfVisit: { type: String, default: '', maxlength: 500 }
     },
     

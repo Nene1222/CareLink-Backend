@@ -11,6 +11,7 @@ import medicinesRouter from './routes/medicines'
 import batchesRouter from './routes/medical/batches'
 import barcodeRouter from './routes/medical/barcode'
 import medicalRecordsRouter from './routes/medical/medicalRecords'
+import mockUsersRouter from './routes/mockUsers'
 import { connectDb } from './db'
 import { seedDatabase } from './seed' // <-- new
 // Import MedicalRecord model to ensure it's registered with Mongoose
@@ -34,6 +35,7 @@ app.use('/api/medicines', medicinesRouter)
 app.use('/api/batches', batchesRouter)
 app.use('/api/barcode', barcodeRouter)
 app.use('/api/medical-records', medicalRecordsRouter)
+app.use('/api', mockUsersRouter)
 
 app.get('/health', (_req, res) => res.json({ ok: true }))
 

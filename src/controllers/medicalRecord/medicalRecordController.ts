@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import { MedicalRecord } from '../../models/medical/medicalRecord'
+import { Attendance } from '../../features/attendance/models/attendance'
 
 export class MedicalRecordController {
   // GET /medical-records
@@ -26,6 +27,11 @@ export class MedicalRecordController {
       }
       
       const records = await MedicalRecord.find(query)
+        .populate({
+          path: 'visit.doctorId',
+          select: 'name role staffId',
+          model: 'Attendance'
+        })
         .sort({ 'visit.dateOfVisit': -1, createdAt: -1 })
         .lean()
       
@@ -42,7 +48,13 @@ export class MedicalRecordController {
       const record = await MedicalRecord.findOne({
         _id: req.params.id,
         deleted_at: null
-      }).lean()
+      })
+        .populate({
+          path: 'visit.doctorId',
+          select: 'name role staffId',
+          model: 'Attendance'
+        })
+        .lean()
       
       if (!record) {
         return res.status(404).json({ error: 'Medical record not found' })
@@ -61,7 +73,13 @@ export class MedicalRecordController {
       const record = await MedicalRecord.findOne({
         recordId: req.params.recordId,
         deleted_at: null
-      }).lean()
+      })
+        .populate({
+          path: 'visit.doctorId',
+          select: 'name role staffId',
+          model: 'Attendance'
+        })
+        .lean()
       
       if (!record) {
         return res.status(404).json({ error: 'Medical record not found' })
@@ -103,13 +121,12 @@ export class MedicalRecordController {
         })
       }
 
-      // Validate nested required fields
-      if (!patient.name || !patient.id || !patient.gender || !patient.dateOfBirth || patient.age === undefined) {
+      // Validate nested required fields (patient.id is now optional)
+      if (!patient.name || !patient.gender || !patient.dateOfBirth || patient.age === undefined) {
         return res.status(400).json({ 
           error: 'Missing required patient fields',
           missing: {
             name: !patient.name,
-            id: !patient.id,
             gender: !patient.gender,
             dateOfBirth: !patient.dateOfBirth,
             age: patient.age === undefined
@@ -117,13 +134,29 @@ export class MedicalRecordController {
         })
       }
 
-      if (!visit.dateOfVisit || !visit.doctor) {
+      if (!visit.dateOfVisit) {
         return res.status(400).json({ 
           error: 'Missing required visit fields',
           missing: {
-            dateOfVisit: !visit.dateOfVisit,
-            doctor: !visit.doctor
+            dateOfVisit: !visit.dateOfVisit
           }
+        })
+      }
+
+      // If doctorId is provided but doctor name is not, fetch doctor name from Attendance
+      if (visit.doctorId && !visit.doctor) {
+        const doctor = await Attendance.findById(visit.doctorId).lean()
+        if (doctor) {
+          visit.doctor = doctor.name
+        } else {
+          return res.status(400).json({ error: 'Invalid doctorId provided' })
+        }
+      }
+
+      // If doctor name is not provided and doctorId is not provided, return error
+      if (!visit.doctor && !visit.doctorId) {
+        return res.status(400).json({ 
+          error: 'Either doctor name or doctorId must be provided'
         })
       }
 
@@ -203,7 +236,16 @@ export class MedicalRecordController {
 
       // Update fields
       if (patient) Object.assign(record.patient, patient)
-      if (visit) Object.assign(record.visit, visit)
+      if (visit) {
+        // If doctorId is provided but doctor name is not, fetch doctor name from Attendance
+        if (visit.doctorId && !visit.doctor) {
+          const doctor = await Attendance.findById(visit.doctorId).lean()
+          if (doctor) {
+            visit.doctor = doctor.name
+          }
+        }
+        Object.assign(record.visit, visit)
+      }
       if (medicalHistory) Object.assign(record.medicalHistory, medicalHistory)
       if (vitalSigns) Object.assign(record.vitalSigns, vitalSigns)
       if (physicalExamination) Object.assign(record.physicalExamination, physicalExamination)
@@ -212,7 +254,14 @@ export class MedicalRecordController {
       if (status) record.status = status
 
       await record.save()
-      return res.json({ data: record })
+      const populatedRecord = await MedicalRecord.findById(record._id)
+        .populate({
+          path: 'visit.doctorId',
+          select: 'name role staffId',
+          model: 'Attendance'
+        })
+        .lean()
+      return res.json({ data: populatedRecord })
     } catch (err) {
       console.error('Error updating medical record', err)
       return res.status(500).json({ error: 'Failed to update medical record' })
